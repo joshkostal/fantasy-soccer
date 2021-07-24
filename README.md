@@ -13,6 +13,7 @@ Mobile application that provides an improved experience for users seeking in-dep
   * TypeScript
 * Server
   * GraphQL
+  * TypeScript
   * graphql-yoga
   * Prisma
 * Database

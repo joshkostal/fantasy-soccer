@@ -1,8 +1,8 @@
-import './ExploreContainer.css';
+import '../styles/Team.css';
 
-interface ContainerProps { }
+interface LineupProps { }
 
-const ExploreContainer: React.FC<ContainerProps> = () => {
+const Lineup: React.FC<LineupProps> = () => {
   return (
     <div className="container">
       <strong>Ready to create an app?</strong>
@@ -11,4 +11,4 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-export default ExploreContainer;
+export default Lineup;
