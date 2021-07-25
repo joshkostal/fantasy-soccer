@@ -22,10 +22,12 @@ import "@ionic/react/css/display.css";
 import "./styles/variables.css";
 import Team from "./pages/Team";
 import Menu from "./components/Menu";
+import Header from "./components/Header";
 
 const App: React.FC = () => (
   <IonApp>
     <Menu />
+    <Header />
     <IonReactRouter>
       <IonRouterOutlet id="content">
         <Route exact path="/team" component={Team} />

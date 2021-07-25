@@ -9,6 +9,7 @@ import {
   IonItem,
   IonRouterOutlet,
 } from "@ionic/react";
+import '../styles/variables.css';
 
 interface RosterProps {}
 

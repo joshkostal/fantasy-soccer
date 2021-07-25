@@ -1,28 +1,15 @@
-import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-import Lineup from "../components/Lineup";
+import { IonContent, IonPage } from "@ionic/react";
+import Header from "../components/Header";
+import Roster from "../components/Roster";
 import "../styles/Team.css";
+import "../styles/variables.css";
 
 const Team: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton color="light-title"></IonMenuButton>
-          </IonButtons>
-          <IonTitle color="light-title">League 1</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <Lineup />
+      <Header />
+      <IonContent color="background">
+        <Roster />
       </IonContent>
     </IonPage>
   );
