@@ -1,34 +1,77 @@
 .container {
-    text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .container strong {
-    font-size: 20px;
-    line-height: 26px;
-  }
-  
-  .container p {
-    font-size: 16px;
-    line-height: 22px;
-    color: #8c8c8c;
-    margin: 0;
-  }
-  
-  .container a {
-    text-decoration: none;
-  }
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-  .roster-card {
-    margin-top: 20px !important;
-    margin-right: 10% !important;
-    margin-left: 10% !important;
-  }
+.container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
 
-  .light-title {
-    color: #e6ebe7;
-  }
+.container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.container a {
+  text-decoration: none;
+}
+
+.roster-card {
+  margin-top: 20px !important;
+  margin-right: 5% !important;
+  margin-left: 2% !important;
+}
+
+.light-title {
+  color: #e6ebe7;
+}
+
+.striker {
+  background-color: #5260ff;
+}
+
+.winger {
+  background-color: #3dc2ff;
+}
+
+.attacking-mid {
+  background-color: #2dd36f;
+}
+
+.center-mid {
+  background-color: #f8d45e;
+}
+
+.defensive-mid {
+  background-color: #f7c029;
+}
+
+.fullback {
+  background-color: #eb445a;
+}
+
+.centerback {
+  background-color: #983ab4;
+}
+
+.goal-keeper {
+  background-color: #f309cc;
+}
+
+.position-tile {
+  border-radius: 4px;
+  text-align: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.player-name-col {
+  padding-left: 8px;
+}

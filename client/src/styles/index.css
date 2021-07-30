@@ -1,0 +1,7 @@
+ion-row {
+  margin-bottom: 10px;
+}
+
+ion-row > ion-col {
+  padding: 0;
+}

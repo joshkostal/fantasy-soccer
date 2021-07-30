@@ -16,16 +16,16 @@ interface RosterProps {}
 const Menu: React.FC<RosterProps> = () => {
   return (
     <>
-      <IonMenu side="start" type="overlay" contentId="main">
+      <IonMenu side="start" contentId="main">
         <IonHeader>
           <IonToolbar>
-            <IonTitle color="light-title">User 1</IonTitle>
+            <IonTitle className="light-title">User 1</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>
           <IonList>
             <IonItem>
-              <IonLabel>League 2</IonLabel>
+              <IonLabel className="light-title">League 2</IonLabel>
             </IonItem>
           </IonList>
         </IonContent>

@@ -13,9 +13,9 @@ const Header: React.FC<HeaderProps> = () => {
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
-          <IonMenuButton color="light-title"></IonMenuButton>
+          <IonMenuButton className="light-title"></IonMenuButton>
         </IonButtons>
-        <IonTitle color="light-title">League 1</IonTitle>
+        <IonTitle className="light-title ion-text-center">League 1</IonTitle>
       </IonToolbar>
     </IonHeader>
   );
