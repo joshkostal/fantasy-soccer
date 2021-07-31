@@ -34,35 +34,35 @@
 }
 
 .striker {
-  background-color: #5260ff;
+  background-color: #cbce23;
 }
 
 .winger {
-  background-color: #3dc2ff;
+  background-color: #dfa505;
 }
 
 .attacking-mid {
-  background-color: #2dd36f;
+  background-color: #308fbb;
 }
 
 .center-mid {
-  background-color: #f8d45e;
+  background-color: #5260ff;
 }
 
 .defensive-mid {
-  background-color: #f7c029;
+  background-color: #2e0fa0;
 }
 
 .fullback {
-  background-color: #eb445a;
+  background-color: #1ca352;
 }
 
 .centerback {
-  background-color: #983ab4;
+  background-color: #0b6b28;
 }
 
 .goal-keeper {
-  background-color: #f309cc;
+  background-color: #eb445a;
 }
 
 .position-tile {
