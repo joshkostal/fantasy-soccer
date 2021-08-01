@@ -23,12 +23,6 @@
   text-decoration: none;
 }
 
-.roster-card {
-  margin-top: 20px !important;
-  margin-right: 5% !important;
-  margin-left: 2% !important;
-}
-
 .light-title {
   color: #e6ebe7;
 }
@@ -42,7 +36,7 @@
 }
 
 .attacking-mid {
-  background-color: #308fbb;
+  background-color: #399cca;
 }
 
 .center-mid {

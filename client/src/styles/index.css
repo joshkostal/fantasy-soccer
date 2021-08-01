@@ -5,3 +5,11 @@ ion-row {
 ion-row > ion-col {
   padding: 0;
 }
+
+ion-card > .card-content-ios {
+  padding-bottom: 8px;
+}
+
+ion-card-header {
+  padding-top: 16px;
+}
