@@ -1,5 +1,6 @@
 import { GraphQLServer } from "graphql-yoga";
-import { resolvers } from "./resolvers";
+import resolvers from "./resolvers";
+import typeDefs from "./schema";
 
 const options = { port: 4000 };
 const server = new GraphQLServer({ typeDefs, resolvers });

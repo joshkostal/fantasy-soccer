@@ -18,6 +18,8 @@ const typeDefs = `
         homeTeam: Team!
         awayTeam: Team!
         matchWeek: Int!
+        homeScore: Int
+        awayScore: Int
     }
 
     type Position {
@@ -32,6 +34,8 @@ const typeDefs = `
         points: Int
     }
 `;
+
+export default typeDefs;
 
 // add dateTime to Match : need to add custom scalar
 
