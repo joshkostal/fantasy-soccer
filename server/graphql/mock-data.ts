@@ -1,35 +1,43 @@
 const samplePositions = {
     striker: {
         id: 1,
-        name: 'Striker'
+        name: 'Striker',
+        shortName: 'ST'
     },
     winger: {
         id: 2,
-        name: 'Winger'
+        name: 'Winger',
+        shortName: 'W'
     },
     attackingmid: {
         id: 3,
-        name: 'Attacking Midfielder'
+        name: 'Attacking Midfielder',
+        shortName: 'AM'
     },
     centermid: {
         id: 4,
-        name: 'Center Midfielder'
+        name: 'Center Midfielder',
+        shortName: 'CM'
     },
     defensivemid: {
         id: 5,
-        name: 'Defensive Midfielder'
+        name: 'Defensive Midfielder',
+        shortName: 'DM'
     },
     fullback: {
         id: 6,
-        name: 'Fullback'
+        name: 'Fullback',
+        shortName: 'FB'
     },
     centerback: {
         id: 7,
-        name: 'Centerback'
+        name: 'Centerback',
+        shortName: 'CB'
     },
     goalkeeper: {
         id: 8,
-        name: 'Goal Keeper'
+        name: 'Goal Keeper',
+        shortName: 'GK'
     },
 };
 

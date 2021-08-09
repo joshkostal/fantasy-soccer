@@ -1,4 +1,4 @@
-const typeDefs = `
+const typeDefs: string = `
     type Player {
         id: ID!
         name: String!
@@ -32,6 +32,10 @@ const typeDefs = `
         isStarter: Boolean!
         match: Match!
         points: Int
+    }
+
+    type Query {
+        players: [Player!]!
     }
 `;
 

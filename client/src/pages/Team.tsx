@@ -45,7 +45,7 @@ const Team: React.FC = () => {
   return (
     <IonPage>
       <Header />
-      <Roster roster={data} />
+      <Roster roster={data.players} />
     </IonPage>
   );
 };

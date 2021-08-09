@@ -1,0 +1,40 @@
+type Player {
+  id: ID! @unique
+  name: String!
+  team: Team
+  nextMatch: PlayerMatch
+  position: Position!
+}
+
+type Team {
+  id: ID! @unique
+  name: String!
+  shortName: String!
+}
+
+type Match {
+  id: ID! @unique
+  homeTeam: Team!
+  awayTeam: Team!
+  matchWeek: Int!
+  homeScore: Int
+  awayScore: Int
+}
+
+type Position {
+  id: ID! @unique
+  name: String!
+  shortName: String!
+}
+
+type PlayerMatch {
+  id: ID! @unique
+  isStarter: Boolean!
+  match: Match!
+  points: Int
+}
+
+
+// add dateTime to Match : need to add custom scalar
+
+// add stats breakdown instead of just 'points'
