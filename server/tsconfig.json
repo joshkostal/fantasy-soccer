@@ -2,6 +2,6 @@
     "compilerOptions": {
       "esModuleInterop": true,
     },
-    "exclude": ["node_modues"]
+    "exclude": ["node_modules"]
   }
   
