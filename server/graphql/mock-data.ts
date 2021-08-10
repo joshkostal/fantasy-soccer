@@ -184,27 +184,27 @@ const samplePlayerMatch = {
         points: 13
     },
     aguero: {
-        isStarter: true,
+        isStarter: false,
         match: sampleMatch.m1,
         points: 0
     },
     willian: {
-        isStarter: true,
+        isStarter: false,
         match: sampleMatch.m1,
         points: 6
     },
     tielemans: {
-        isStarter: true,
+        isStarter: false,
         match: sampleMatch.m1,
         points: 9
     },
     zouma: {
-        isStarter: true,
+        isStarter: false,
         match: sampleMatch.m2,
         points: 0
     },
     pickford: {
-        isStarter: true,
+        isStarter: false,
         match: sampleMatch.m3,
         points: 18
     },

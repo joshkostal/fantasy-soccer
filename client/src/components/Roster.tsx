@@ -29,14 +29,16 @@ const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
               PositionClassMapping[player.position.id as EPosition]
             }`}
           >
-            {player.position}
+            {player.position.shortName}
           </IonCol>
           <IonCol size="6" className="light-title player-name-col">
             {player.name}
           </IonCol>
           <IonCol size="3.5" className="light-title">
             {player.nextMatch.match.homeTeam.id !== player.team.id && "@"}
-            {player.nextMatch.match.homeTeam.id === player.team.id ? player.nextMatch.match.homeTeam.shortName : player.nextMatch.match.awayTeam.shortName}
+            {player.nextMatch.match.homeTeam.id === player.team.id
+              ? player.nextMatch.match.homeTeam.shortName
+              : player.nextMatch.match.awayTeam.shortName}
           </IonCol>
           <IonCol size="1" className="ion-text-right light-title">
             {player.nextMatch.points}
