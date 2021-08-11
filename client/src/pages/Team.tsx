@@ -5,10 +5,12 @@ import Roster from "../components/Roster";
 import "../styles/Team.css";
 import "../styles/variables.css";
 
+const fantasyTeamId = 1;
+
 const Team: React.FC = () => {
   const TEAM_PLAYERS = gql`
     query GetTeamPlayers {
-      players {
+      fantasyTeamPlayers(fantasyTeamId: ${fantasyTeamId}) {
         id,
         name,
         team {
@@ -45,7 +47,7 @@ const Team: React.FC = () => {
   return (
     <IonPage>
       <Header />
-      <Roster roster={data.players} />
+      <Roster roster={data.fantasyTeamPlayers} />
     </IonPage>
   );
 };
