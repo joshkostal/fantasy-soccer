@@ -1,0 +1,57 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Player {
+    id         Int    @id @default(autoincrement())
+    name       String @db.VarChar(63)
+    teamId     Int?
+    positionId Int
+
+    team          Team?         @relation(fields: [teamId], references: [id])
+    position      Position      @relation(fields: [positionId], references: [id])
+    playerMatches PlayerMatch[]
+}
+
+model Position {
+    id        Int    @id @default(autoincrement())
+    name      String @unique @db.VarChar(15)
+    shortName String @unique @db.VarChar(2)
+
+    players Player[]
+}
+
+model PlayerMatch {
+    id        Int     @id @default(autoincrement())
+    isStarter Boolean @default(false)
+    points    Int?
+    matchId   Int
+    playerId  Int
+
+    match  Match  @relation(fields: [matchId], references: [id])
+    player Player @relation(fields: [playerId], references: [id])
+}
+
+model Match {
+    id         Int  @id @default(autoincrement())
+    matchWeek  Int
+    homeScore  Int?
+    awayScore  Int?
+    homeTeamId Int
+    awayTeamId Int
+
+    homeTeam      Team          @relation("home", fields: [homeTeamId], references: [id])
+    awayTeam      Team          @relation("away", fields: [awayTeamId], references: [id])
+    playerMatches PlayerMatch[]
+}
+
+model Team {
+    id        Int    @id @default(autoincrement())
+    name      String @unique @db.VarChar(63)
+    shortName String @unique @db.VarChar(7)
+
+    players     Player[]
+    homeMatches Match[]  @relation("home")
+    awayMatches Match[]  @relation("away")
+}
