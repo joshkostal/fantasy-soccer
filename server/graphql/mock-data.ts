@@ -100,30 +100,35 @@ const sampleMatch = {
     homeTeam: sampleTeams.fulham,
     awayTeam: sampleTeams.manCity,
     matchWeek: 1,
+    dateTime: new Date(),
   },
   m2: {
     id: 1,
     homeTeam: sampleTeams.liverpool,
     awayTeam: sampleTeams.chelsea,
     matchWeek: 1,
+    dateTime: new Date(),
   },
   m3: {
     id: 1,
     homeTeam: sampleTeams.manu,
     awayTeam: sampleTeams.everton,
     matchWeek: 1,
+    dateTime: new Date(),
   },
   m4: {
     id: 1,
     homeTeam: sampleTeams.arsenal,
     awayTeam: sampleTeams.leicester,
     matchWeek: 1,
+    dateTime: new Date(),
   },
   m5: {
     id: 1,
     homeTeam: sampleTeams.tottenham,
     awayTeam: sampleTeams.wolves,
     matchWeek: 1,
+    dateTime: new Date(),
   },
 };
 

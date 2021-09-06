@@ -10,6 +10,7 @@
     "typescript": "^4.3.5"
   },
   "devDependencies": {
+    "@types/graphql": "^14.5.0",
     "prisma": "^2.30.3",
     "ts-node": "7.0.0"
   }

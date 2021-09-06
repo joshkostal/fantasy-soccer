@@ -4,7 +4,7 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 model Player {
@@ -29,7 +29,7 @@ model Position {
 model PlayerMatch {
     id        Int     @id @default(autoincrement())
     isStarter Boolean @default(false)
-    points    Int?
+    points    Int?    // Break this down to individual stats
     matchId   Int
     playerId  Int
 
@@ -38,12 +38,13 @@ model PlayerMatch {
 }
 
 model Match {
-    id         Int  @id @default(autoincrement())
+    id         Int      @id @default(autoincrement())
     matchWeek  Int
     homeScore  Int?
     awayScore  Int?
     homeTeamId Int
     awayTeamId Int
+    dateTime   DateTime
 
     homeTeam      Team          @relation("home", fields: [homeTeamId], references: [id])
     awayTeam      Team          @relation("away", fields: [awayTeamId], references: [id])

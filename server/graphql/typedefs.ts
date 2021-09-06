@@ -20,6 +20,7 @@ const typeDefs: string = `
         matchWeek: Int!
         homeScore: Int
         awayScore: Int
+        dateTime: DateTime
     }
 
     type Position {
@@ -64,10 +65,10 @@ const typeDefs: string = `
         players: [Player!]!
         fantasyTeamPlayers(fantasyTeamId: Int): [Player!]!
     }
+
+    scalar DateTime
 `;
 
 export default typeDefs;
-
-// add dateTime to Match : need to add custom scalar
 
 // add stats breakdown instead of just 'points'

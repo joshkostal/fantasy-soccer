@@ -19,6 +19,7 @@ type Match {
   matchWeek: Int!
   homeScore: Int
   awayScore: Int
+  dateTime: DateTime
 }
 
 type Position {
@@ -34,7 +35,6 @@ type PlayerMatch {
   points: Int
 }
 
-
-// add dateTime to Match : need to add custom scalar
+scalar DateTime
 
 // add stats breakdown instead of just 'points'
