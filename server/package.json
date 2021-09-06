@@ -5,10 +5,12 @@
     "start": "ts-node index.ts"
   },
   "dependencies": {
+    "@prisma/client": "^2.30.3",
     "graphql-yoga": "^1.18.3",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
+    "prisma": "^2.30.3",
     "ts-node": "7.0.0"
   }
 }
