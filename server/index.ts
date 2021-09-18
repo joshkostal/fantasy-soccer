@@ -1,6 +1,6 @@
 import { GraphQLServer, Options } from "graphql-yoga";
-import typeDefs from "./graphql/typedefs";
-import resolvers from "./graphql/resolvers";
+import typeDefs from "./src/graphql/typedefs";
+import resolvers from "./src/graphql/resolvers";
 import cors from "cors";
 import { Prisma } from "prisma";
 

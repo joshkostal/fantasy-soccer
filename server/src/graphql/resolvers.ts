@@ -1,12 +1,10 @@
-import { samplePlayers } from "./mock-data";
 import { GraphQLScalarType } from "graphql";
 
 const resolvers = {
   Query: {
-    players: () => samplePlayers,
-    // players: (root, args, ctx, info) => ctx.prisma.query.players({}, info),
-    fantasyTeamPlayers: (_, { fantasyTeamId }) =>
-      samplePlayers.filter(p => p.fantasyTeam.id == fantasyTeamId),
+    players: (root, args, ctx, info) => ctx.prisma.query.players({}, info),
+    // players: (_, { fantasyTeamId }) =>
+    //   samplePlayers.filter((p) => p.fantasyTeam.id == fantasyTeamId),
   },
   DateTime: new GraphQLScalarType({
     name: "DateTime",

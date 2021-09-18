@@ -8,10 +8,11 @@ import {
   IonGrid,
   IonRow,
 } from "@ionic/react";
-import { EPosition, Player, PositionClassMapping } from "../models/player";
 import "../styles/Team.css";
 import "../styles/index.css";
 import "../styles/variables.css";
+import { EPosition, PositionClassMapping } from "../types/player";
+import { Player } from "@graphql-types/player"
 
 interface RosterProps {
   roster: Player[];

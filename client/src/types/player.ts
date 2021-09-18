@@ -1,27 +1,4 @@
-import { Match } from "./match";
-import { Team } from "./team";
-
-export interface Player {
-    name: string;
-    id: number;
-    position: Position;
-    team: Team;
-    nextMatch: PlayerMatch;
-  }
-  
-  export interface Position {
-    id: number;
-    name: string;
-    shortName: string;
-  }
-
-  export interface PlayerMatch {
-      match: Match;
-      points?: number;
-      isStarter: boolean;
-  }
-  
-  export enum EPosition {
+export enum EPosition {
     ST = 1,
     W = 2,
     AM = 3,
