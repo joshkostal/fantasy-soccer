@@ -48,10 +48,8 @@ const typeDefs: string = `
         commissioner: User!
     }
 
-    type FantasyLeaguePlayer {
-        id: ID!
-        league: FantasyLeague!
-        team: FantasyTeam
+    type FantasyTeamPlayer {
+        team: FantasyTeam!
         player: Player!
     }
 
@@ -62,7 +60,6 @@ const typeDefs: string = `
     }
 
     type Query {
-        players: [Player!]!
         fantasyTeamPlayers(fantasyTeamId: Int): [Player!]!
     }
 

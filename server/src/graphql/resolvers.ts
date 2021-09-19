@@ -1,10 +1,19 @@
+//@ts-ignore
+import { GraphQLServer } from "graphql-yoga";
 import { GraphQLScalarType } from "graphql";
 
 const resolvers = {
   Query: {
-    players: (root, args, ctx, info) => ctx.prisma.query.players({}, info),
-    // players: (_, { fantasyTeamId }) =>
-    //   samplePlayers.filter((p) => p.fantasyTeam.id == fantasyTeamId),
+    fantasyTeamPlayers: (root, args, ctx: GraphQLServer) =>
+      ctx.prisma.query.players.findMany({
+        where: {
+          fantasyTeams: {
+            some: {
+              fantasyTeamId: args.fantasyTeamId,
+            },
+          },
+        },
+      }),
   },
   DateTime: new GraphQLScalarType({
     name: "DateTime",

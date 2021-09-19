@@ -13,9 +13,10 @@ model Player {
     teamId     Int?
     positionId Int
 
-    team          Team?         @relation(fields: [teamId], references: [id])
-    position      Position      @relation(fields: [positionId], references: [id])
+    team          Team?               @relation(fields: [teamId], references: [id])
+    position      Position            @relation(fields: [positionId], references: [id])
     playerMatches PlayerMatch[]
+    fantasyTeams  FantasyTeamPlayer[]
 }
 
 model Position {
@@ -29,7 +30,7 @@ model Position {
 model PlayerMatch {
     id        Int     @id @default(autoincrement())
     isStarter Boolean @default(false)
-    points    Int?    // Break this down to individual stats
+    points    Int? // Break this down to individual stats
     matchId   Int
     playerId  Int
 
@@ -59,4 +60,42 @@ model Team {
     players     Player[]
     homeMatches Match[]  @relation("home")
     awayMatches Match[]  @relation("away")
+}
+
+model FantasyTeamPlayer {
+    playerId      Int
+    fantasyTeamId Int
+
+    player      Player      @relation(fields: [playerId], references: [id])
+    fantasyTeam FantasyTeam @relation(fields: [fantasyTeamId], references: [id])
+    @@unique([playerId, fantasyTeamId])
+}
+
+model FantasyTeam {
+    id              Int    @id @default(autoincrement())
+    name            String @db.VarChar(63)
+    fantasyLeagueId Int
+    ownerId         Int
+
+    fantasyLeague FantasyLeague       @relation(fields: [fantasyLeagueId], references: [id])
+    owner         User                @relation(fields: [ownerId], references: [id])
+    players       FantasyTeamPlayer[]
+}
+
+model FantasyLeague {
+    id             Int    @id @default(autoincrement())
+    name           String @db.VarChar(63)
+    commissionerId Int
+
+    fantasyTeams FantasyTeam[]
+    commissioner User          @relation(fields: [commissionerId], references: [id])
+}
+
+model User {
+    id    Int    @id @default(autoincrement())
+    name  String @db.VarChar(63)
+    email String @unique @db.VarChar(63)
+
+    fantasyTeams        FantasyTeam[]
+    commissionerLeagues FantasyLeague[]
 }
