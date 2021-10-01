@@ -4,7 +4,7 @@ import { GraphQLScalarType } from "graphql";
 
 const resolvers = {
   Query: {
-    fantasyTeamPlayers: (root, args, ctx: GraphQLServer) =>
+    fantasyTeamPlayers: (_root, args, ctx: GraphQLServer) =>
       ctx.prisma.query.players.findMany({
         where: {
           fantasyTeams: {

@@ -9,33 +9,34 @@ generator client {
 
 model Player {
     id         Int    @id @default(autoincrement())
-    name       String @db.VarChar(63)
+    name       String @db.VarChar(64)
     teamId     Int?
     positionId Int
 
-    team          Team?               @relation(fields: [teamId], references: [id])
-    position      Position            @relation(fields: [positionId], references: [id])
-    playerMatches PlayerMatch[]
-    fantasyTeams  FantasyTeamPlayer[]
+    team               Team?               @relation(fields: [teamId], references: [id])
+    position           Position            @relation(fields: [positionId], references: [id])
+    playerMatches      PlayerMatch[]
+    fantasyTeamPlayers FantasyTeamPlayer[]
 }
 
 model Position {
     id        Int    @id @default(autoincrement())
-    name      String @unique @db.VarChar(15)
+    name      String @unique @db.VarChar(32)
     shortName String @unique @db.VarChar(2)
 
     players Player[]
 }
 
 model PlayerMatch {
-    id        Int     @id @default(autoincrement())
-    isStarter Boolean @default(false)
-    points    Int? // Break this down to individual stats
-    matchId   Int
-    playerId  Int
+    id       Int  @id @default(autoincrement())
+    points   Int? // Break this down to individual stats
+    matchId  Int
+    playerId Int
 
-    match  Match  @relation(fields: [matchId], references: [id])
-    player Player @relation(fields: [playerId], references: [id])
+    match                Match                @relation(fields: [matchId], references: [id])
+    player               Player               @relation(fields: [playerId], references: [id])
+    fantasyPlayerMatches FantasyPlayerMatch[]
+    @@unique([playerId, matchId])
 }
 
 model Match {
@@ -50,12 +51,13 @@ model Match {
     homeTeam      Team          @relation("home", fields: [homeTeamId], references: [id])
     awayTeam      Team          @relation("away", fields: [awayTeamId], references: [id])
     playerMatches PlayerMatch[]
+    @@unique([matchWeek, homeTeamId, awayTeamId])
 }
 
 model Team {
     id        Int    @id @default(autoincrement())
-    name      String @unique @db.VarChar(63)
-    shortName String @unique @db.VarChar(7)
+    name      String @unique @db.VarChar(64)
+    shortName String @unique @db.VarChar(8)
 
     players     Player[]
     homeMatches Match[]  @relation("home")
@@ -63,28 +65,41 @@ model Team {
 }
 
 model FantasyTeamPlayer {
+    id            Int @id @default(autoincrement())
     playerId      Int
     fantasyTeamId Int
 
     player      Player      @relation(fields: [playerId], references: [id])
     fantasyTeam FantasyTeam @relation(fields: [fantasyTeamId], references: [id])
+    fantasyPlayerMatches FantasyPlayerMatch[]
     @@unique([playerId, fantasyTeamId])
+}
+
+model FantasyPlayerMatch {
+    playerMatchId       Int
+    fantasyTeamPlayerId Int
+    isStarter           Boolean @default(false)
+
+    playerMatch PlayerMatch @relation(fields: [playerMatchId], references: [id])
+    fantasyTeamPlayer FantasyTeamPlayer @relation(fields: [fantasyTeamPlayerId], references: [id])
+    @@unique([playerMatchId, fantasyTeamPlayerId])
 }
 
 model FantasyTeam {
     id              Int    @id @default(autoincrement())
-    name            String @db.VarChar(63)
+    name            String @db.VarChar(64)
     fantasyLeagueId Int
     ownerId         Int
 
-    fantasyLeague FantasyLeague       @relation(fields: [fantasyLeagueId], references: [id])
-    owner         User                @relation(fields: [ownerId], references: [id])
-    players       FantasyTeamPlayer[]
+    fantasyLeague      FantasyLeague        @relation(fields: [fantasyLeagueId], references: [id])
+    owner              User                 @relation(fields: [ownerId], references: [id])
+    players            FantasyTeamPlayer[]
+    @@unique([fantasyLeagueId, ownerId])
 }
 
 model FantasyLeague {
     id             Int    @id @default(autoincrement())
-    name           String @db.VarChar(63)
+    name           String @db.VarChar(64)
     commissionerId Int
 
     fantasyTeams FantasyTeam[]
@@ -93,8 +108,8 @@ model FantasyLeague {
 
 model User {
     id    Int    @id @default(autoincrement())
-    name  String @db.VarChar(63)
-    email String @unique @db.VarChar(63)
+    name  String @db.VarChar(64)
+    email String @unique @db.VarChar(64)
 
     fantasyTeams        FantasyTeam[]
     commissionerLeagues FantasyLeague[]
