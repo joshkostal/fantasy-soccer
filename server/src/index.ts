@@ -1,4 +1,3 @@
-//@ts-ignore
 import { GraphQLServer, Options } from "graphql-yoga";
 import typeDefs from "./graphql/typedefs";
 import resolvers from "./graphql/resolvers";

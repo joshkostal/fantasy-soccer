@@ -1,3 +1,5 @@
+import { FantasyPlayerMatch } from ".prisma/client"
+import { FantasyTeamPlayer } from "./fantasy"
 import { PlayerMatch } from "./match"
 import { Team } from "./team"
 
@@ -9,6 +11,7 @@ export interface Player {
     team: Team;
     position: Position;
     playerMatches: PlayerMatch[];
+    fantasyTeams: FantasyTeamPlayer[];
 }
 
 export interface Position {
@@ -16,4 +19,5 @@ export interface Position {
     name: string;
     shortName: string;
     players: Player[];
+    fantasyPlayerMatches: FantasyPlayerMatch[];
 }

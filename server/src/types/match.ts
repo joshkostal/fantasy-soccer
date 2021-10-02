@@ -1,3 +1,4 @@
+import { FantasyPlayerMatch } from "./fantasy";
 import { Player } from "./player";
 import { Team } from "./team";
 
@@ -11,15 +12,37 @@ export interface Match {
     dateTime: Date;
     homeTeam: Team;
     awayTeam: Team;
-    playerMatches: PlayerMatch[];
+    players: PlayerMatch[];
 }
 
 export interface PlayerMatch {
     id: number;
-    isStarter: boolean;
-    points: number;    // Break this down to individual stats
+    totalPoints: number;
+    goals?: number;
+    assists?: number;
+    pksWon?: number;
+    isMOTM?: boolean;
+    hasHatTrick?: boolean;
+    hasYellowCard?: boolean;
+    hasRedCard?: boolean;
+    pksConceded?: number;
+    pksMissed?: number;
+    offsides?: number;
+    saves?: number;
+    tackles?: number;
+    pksSaved?: number;
+    shotsBlocked?: number;
+    interceptions?: number;
+    isCleanSheet?: boolean;
+    goalsConceded?: number;
+    dribblesCompleted?: number;
+    shotsOnTarget?: number;
+    keyPasses?: number;
+    isShutout?: boolean;
+    timesDribbledPast?: number;
     matchId: number;
     playerId: number;
     match: Match;
     player: Player;
+    fantasyPlayerMatches: FantasyPlayerMatch[];
 }
