@@ -6,9 +6,6 @@
       "dom.iterable",
       "esnext"
     ],
-    "paths": {
-      "@graphql-types/*": ["../server/src/types/*"]
-    },
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
@@ -26,5 +23,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "extends": "./base-tsconfig.json"
 }

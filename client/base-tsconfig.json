@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "paths": {
+          "@graphql-types/*": ["../server/src/types/*"]
+        }
+    }
+}

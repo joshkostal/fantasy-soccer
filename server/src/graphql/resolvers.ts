@@ -3,13 +3,30 @@ import { GraphQLScalarType } from "graphql";
 const resolvers = {
   Query: {
     fantasyTeamPlayers: (_root, args, ctx) =>
-      ctx.prisma.query.players.findMany({
+      ctx.prisma.player.findMany({
         where: {
-          fantasyTeams: {
+          fantasyTeamPlayers: {
             some: {
               fantasyTeamId: args.fantasyTeamId,
             },
           },
+        },
+        select: {
+          team: true,
+          position: true,
+          matches: true,
+          // matches: {
+          //   as: "nextMatch",
+          //   where: {
+          //     dateTime: {
+          //       gt: new Date(),
+          //     },
+          //   },
+          //   orderBy: {
+          //     dateTime: "desc",
+          //   },
+          //   take: 1,
+          // },
         },
       }),
   },

@@ -21,20 +21,20 @@ const Team: React.FC = () => {
           id,
           shortName
         },
-        nextMatch {
-          isStarter,
-          points,
-          match {
-            homeTeam {
-              id,
-              shortName
-            },
-            awayTeam {
-              id,
-              shortName
-            }
-          }
-        }
+        # nextMatch {
+        #   isStarter,
+        #   points,
+        #   match {
+        #     homeTeam {
+        #       id,
+        #       shortName
+        #     },
+        #     awayTeam {
+        #       id,
+        #       shortName
+        #     }
+        #   }
+        # }
       }
     }
   `;

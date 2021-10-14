@@ -21,7 +21,7 @@ interface RosterProps {
 const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
   const rosterTable = (isStarter: boolean) =>
     roster
-      .filter((player) => player.nextMatch.isStarter == isStarter)
+      // .filter((player) => player.nextMatch.isStarter == isStarter)
       .map((player) => (
         <IonRow key={player.id}>
           <IonCol
@@ -36,13 +36,16 @@ const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
             {player.name}
           </IonCol>
           <IonCol size="3.5" className="light-title">
-            {player.nextMatch.match.homeTeam.id !== player.team.id && "@"}
+            {
+            /* {player.nextMatch.match.homeTeam.id !== player.team.id && "@"}
             {player.nextMatch.match.homeTeam.id === player.team.id
               ? player.nextMatch.match.homeTeam.shortName
-              : player.nextMatch.match.awayTeam.shortName}
+              : player.nextMatch.match.awayTeam.shortName} */
+                player.team.shortName
+              }
           </IonCol>
           <IonCol size="1" className="ion-text-right light-title">
-            {player.nextMatch.points}
+            {/* {player.nextMatch.points} */}10
           </IonCol>
         </IonRow>
       ));
