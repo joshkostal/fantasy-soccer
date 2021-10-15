@@ -10,7 +10,7 @@ export interface Player {
     positionId: number;
     team: Team;
     position: Position;
-    playerMatches: PlayerMatch[];
+    matches: PlayerMatch[];
     fantasyTeams: FantasyTeamPlayer[];
 }
 

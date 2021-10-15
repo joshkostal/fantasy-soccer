@@ -14,19 +14,43 @@ const resolvers = {
         select: {
           team: true,
           position: true,
-          matches: true,
-          // matches: {
-          //   as: "nextMatch",
-          //   where: {
-          //     dateTime: {
-          //       gt: new Date(),
-          //     },
-          //   },
-          //   orderBy: {
-          //     dateTime: "desc",
-          //   },
-          //   take: 1,
-          // },
+          matches: {
+            as: "nextMatch",
+            where: {
+              dateTime: {
+                gte: new Date(),
+              },
+            },
+            orderBy: {
+              dateTime: "desc",
+            },
+            take: 1,
+            select: {
+              match: {
+                homeTeam: {
+                  id: true,
+                  shortName: true,
+                },
+                awayTeam: {
+                  id: true,
+                  shortName: true,
+                },
+              },
+              totalPoints: true,
+              fantasyPlayerMatches: {
+                where: {
+                  fantasyTeamPlayer: {
+                    fantasyTeamId: {
+                      eq: args.fantasyTeamId,
+                    },
+                  },
+                },
+                select: {
+                  isStarter: true,
+                },
+              },
+            },
+          },
         },
       }),
   },
