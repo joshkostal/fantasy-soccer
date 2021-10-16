@@ -1,5 +1,4 @@
-import { FantasyPlayerMatch } from ".prisma/client"
-import { FantasyTeamPlayer } from "./fantasy"
+import { FantasyPlayerMatch, FantasyTeamPlayer } from "./fantasy"
 import { PlayerMatch } from "./match"
 import { Team } from "./team"
 

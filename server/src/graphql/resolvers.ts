@@ -1,48 +1,49 @@
 import { GraphQLScalarType } from "graphql";
+import { Context } from "../prisma";
 
 const resolvers = {
   Query: {
-    fantasyTeamPlayers: (_root, args, ctx) =>
+    fantasyTeamPlayers: (_root, args, ctx: Context) =>
       ctx.prisma.player.findMany({
         where: {
-          fantasyTeamPlayers: {
+          fantasyTeams: {
             some: {
               fantasyTeamId: args.fantasyTeamId,
             },
           },
         },
         select: {
+          id: true,
+          name: true,
           team: true,
           position: true,
+          // ALIAS
           matches: {
-            as: "nextMatch",
             where: {
-              dateTime: {
-                gte: new Date(),
+              match: {
+                dateTime: {
+                  gte: new Date(),
+                },
               },
             },
             orderBy: {
-              dateTime: "desc",
+              match: {
+                dateTime: "desc",
+              },
             },
             take: 1,
             select: {
               match: {
-                homeTeam: {
-                  id: true,
-                  shortName: true,
-                },
-                awayTeam: {
-                  id: true,
-                  shortName: true,
+                select: {
+                  homeTeam: true,
+                  awayTeam: true,
                 },
               },
               totalPoints: true,
               fantasyPlayerMatches: {
                 where: {
                   fantasyTeamPlayer: {
-                    fantasyTeamId: {
-                      eq: args.fantasyTeamId,
-                    },
+                    fantasyTeamId: args.fantasyTeamId,
                   },
                 },
                 select: {
