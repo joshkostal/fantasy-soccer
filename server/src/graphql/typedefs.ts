@@ -115,6 +115,7 @@ const typeDefs: string = `
 
     type Query {
         fantasyTeamPlayers(fantasyTeamId: Int): [Player!]!
+        fantasyLeagues(userId: Int): [FantasyTeam!]
     }
 
     scalar DateTime
