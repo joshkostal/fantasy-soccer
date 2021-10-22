@@ -14,7 +14,6 @@ const typeDefs: string = `
         position: Position!
         matches: [PlayerMatch!]
         fantasyTeams: [FantasyTeamPlayer!]
-        nextMatch: PlayerMatch
     }
 
     type Team {

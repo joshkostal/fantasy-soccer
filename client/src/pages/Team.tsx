@@ -15,14 +15,15 @@ const Team: React.FC = () => {
         name,
         team {
           id,
-          shortName
         },
         position {
           id,
           shortName
         },
-        nextMatch {
-          isStarter,
+        matches {
+          fantasyPlayerMatches {
+            isStarter
+          },
           totalPoints,
           match {
             homeTeam {

@@ -10,12 +10,15 @@ const fantasyTeamQueries = {
           },
         },
       },
+      orderBy: {
+        positionId: "asc",
+      },
       select: {
         id: true,
         name: true,
         team: true,
         position: true,
-        // ALIAS
+        // ALIASES NOT YET SUPPORTED BY PRISMA
         matches: {
           where: {
             match: {
