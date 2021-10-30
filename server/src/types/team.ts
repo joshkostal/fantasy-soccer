@@ -1,13 +1,13 @@
 import { Match } from "./match";
-import { Player } from "./player"
+import { Player } from "./player";
 
 export interface Team {
-    id: number;
-    name: string;
-    shortName: string;
-    players: Player[];
-    homeMatches: Match[];
-    awayMatches: Match[];
+  id: number;
+  name: string;
+  shortName: string;
+  players: Player[];
+  homeMatches: Match[];
+  awayMatches: Match[];
 }
 
 /*

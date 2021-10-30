@@ -8,10 +8,11 @@ generator client {
 }
 
 model Player {
-    id         Int    @id @default(autoincrement())
-    name       String @db.VarChar(64)
-    teamId     Int?
-    positionId Int
+    id          Int    @id @default(autoincrement())
+    name        String @db.VarChar(64)
+    displayName String @db.VarChar(24)
+    teamId      Int?
+    positionId  Int
 
     team         Team?               @relation(fields: [teamId], references: [id])
     position     Position            @relation(fields: [positionId], references: [id])
@@ -24,15 +25,14 @@ model Position {
     name      String @unique @db.VarChar(32)
     shortName String @unique @db.VarChar(2)
 
-    players Player[]
+    players            Player[]
     fantasyPlayerMatch FantasyPlayerMatch[]
 }
 
 model PlayerMatch {
-    id          Int  @id @default(autoincrement())
-    totalPoints Int? // TODO: Should we keep this? It will make processing quicker
-    matchId     Int
-    playerId    Int
+    id       Int @id @default(autoincrement())
+    matchId  Int
+    playerId Int
 
     goals             Int?
     assists           Int?
@@ -73,9 +73,9 @@ model Match {
     awayTeamId Int
     dateTime   DateTime
 
-    homeTeam      Team          @relation("home", fields: [homeTeamId], references: [id])
-    awayTeam      Team          @relation("away", fields: [awayTeamId], references: [id])
-    players PlayerMatch[]
+    homeTeam Team          @relation("home", fields: [homeTeamId], references: [id])
+    awayTeam Team          @relation("away", fields: [awayTeamId], references: [id])
+    players  PlayerMatch[]
 
     @@unique([matchWeek, homeTeamId, awayTeamId])
 }
@@ -97,22 +97,22 @@ model FantasyTeamPlayer {
 
     player               Player               @relation(fields: [playerId], references: [id])
     fantasyTeam          FantasyTeam          @relation(fields: [fantasyTeamId], references: [id])
-    fantasyPlayerMatches FantasyPlayerMatch[]
 
     @@unique([playerId, fantasyTeamId])
 }
 
 model FantasyPlayerMatch {
-    playerMatchId       Int
-    fantasyTeamPlayerId Int
-    isStarter           Boolean @default(false)
-    positionId          Int? // TODO: Add check constraint to ensure a position is only selected if isStarter == true (https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/include-unsupported-database-features)
+    playerMatchId Int
+    fantasyTeamId Int
+    isStarter     Boolean @default(false)
+    positionId    Int? // TODO: Add check constraint to ensure a position is only selected if isStarter == true (https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/include-unsupported-database-features)
+    totalPoints   Int? // TODO: Should we keep this? It will make processing quicker
 
-    position          Position?          @relation(fields: [positionId], references: [id])
-    playerMatch       PlayerMatch       @relation(fields: [playerMatchId], references: [id])
-    fantasyTeamPlayer FantasyTeamPlayer @relation(fields: [fantasyTeamPlayerId], references: [id])
+    position    Position?   @relation(fields: [positionId], references: [id])
+    playerMatch PlayerMatch @relation(fields: [playerMatchId], references: [id])
+    fantasyTeam FantasyTeam @relation(fields: [fantasyTeamId], references: [id])
 
-    @@unique([playerMatchId, fantasyTeamPlayerId])
+    @@unique([playerMatchId, fantasyTeamId])
 }
 
 model FantasyMatch {
@@ -121,6 +121,7 @@ model FantasyMatch {
     team2Id    Int
     team1Score Int?
     team2Score Int?
+    gameWeek   Int
 
     team1 FantasyTeam @relation("team1", fields: [team1Id], references: [id])
     team2 FantasyTeam @relation("team2", fields: [team2Id], references: [id])
@@ -137,6 +138,7 @@ model FantasyTeam {
     players       FantasyTeamPlayer[]
     team1Matches  FantasyMatch[]      @relation("team1")
     team2Matches  FantasyMatch[]      @relation("team2")
+    fantasyPlayerMatches FantasyPlayerMatch[]
 
     @@unique([fantasyLeagueId, ownerId])
 }

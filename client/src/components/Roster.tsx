@@ -12,7 +12,7 @@ import "../styles/Team.css";
 import "../styles/index.css";
 import "../styles/variables.css";
 import { EPosition, PositionClassMapping } from "../types/player";
-import { Player } from "@graphql-types/player"
+import { Player } from "@graphql-types/player";
 
 interface RosterProps {
   roster: Player[];
@@ -21,8 +21,11 @@ interface RosterProps {
 const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
   const rosterTable = (isStarter: boolean) =>
     roster
-      .filter(player => player.matches[0]?.fantasyPlayerMatches[0]?.isStarter == isStarter)
-      .map(player => (
+      .filter(
+        (player) =>
+          player.matches[0]?.fantasyPlayerMatches[0]?.isStarter == isStarter
+      )
+      .map((player) => (
         <IonRow key={player.id}>
           <IonCol
             size="1.5"
@@ -33,7 +36,7 @@ const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
             {player.position.shortName}
           </IonCol>
           <IonCol size="6" className="light-title player-name-col">
-            {player.name}
+            {player.displayName}
           </IonCol>
           <IonCol size="3.5" className="light-title">
             {player.matches[0].match.homeTeam.id !== player.team.id && "@"}
@@ -42,7 +45,7 @@ const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
               : player.matches[0].match.awayTeam.shortName}
           </IonCol>
           <IonCol size="1" className="ion-text-right light-title">
-            {player.matches[0].totalPoints}
+            {player.matches[0].fantasyPlayerMatches[0].totalPoints}
           </IonCol>
         </IonRow>
       ));

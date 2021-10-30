@@ -10,6 +10,7 @@ const typeDefs: string = `
     type Player {
         id: ID!
         name: String!
+        displayName: String!
         team: Team
         position: Position!
         matches: [PlayerMatch!]
@@ -45,7 +46,6 @@ const typeDefs: string = `
 
     type PlayerMatch {
         id: ID!
-        totalPoints: Int
         goals: Int
         assists: Int
         pksWon: Int
@@ -100,8 +100,9 @@ const typeDefs: string = `
     type FantasyPlayerMatch {
         isStarter: Boolean!
         positionId: Int
+        totalPoints: Int
         playerMatch: PlayerMatch!
-        fantasyTeamPlayer: FantasyTeamPlayer!
+        fantasyTeam: FantasyTeam!
     }
     
     type FantasyMatch {
@@ -110,6 +111,7 @@ const typeDefs: string = `
         team2Score: Int
         team1: FantasyTeam!
         team2: FantasyTeam!
+        totalPoints: Int
     }
 
     type Query {

@@ -15,7 +15,7 @@ const fantasyTeamQueries = {
       },
       select: {
         id: true,
-        name: true,
+        displayName: true,
         team: true,
         position: true,
         // ALIASES NOT YET SUPPORTED BY PRISMA
@@ -40,14 +40,12 @@ const fantasyTeamQueries = {
                 awayTeam: true,
               },
             },
-            totalPoints: true,
             fantasyPlayerMatches: {
               where: {
-                fantasyTeamPlayer: {
-                  fantasyTeamId: args.fantasyTeamId,
-                },
+                fantasyTeamId: args.fantasyTeamId,
               },
               select: {
+                totalPoints: true,
                 isStarter: true,
               },
             },

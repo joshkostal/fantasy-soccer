@@ -12,7 +12,7 @@ const Team: React.FC = () => {
     query GetTeamPlayers {
       fantasyTeamPlayers(fantasyTeamId: ${fantasyTeamId}) {
         id,
-        name,
+        displayName,
         team {
           id,
         },
@@ -22,9 +22,9 @@ const Team: React.FC = () => {
         },
         matches {
           fantasyPlayerMatches {
+            totalPoints,
             isStarter
           },
-          totalPoints,
           match {
             homeTeam {
               id,
