@@ -9,8 +9,6 @@ import {
   IonRow,
 } from "@ionic/react";
 import "../styles/Team.css";
-import "../styles/index.css";
-import "../styles/variables.css";
 import { EPosition, PositionClassMapping } from "../types/player";
 import { Player } from "@graphql-types/player";
 
@@ -29,22 +27,22 @@ const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
         <IonRow key={player.id}>
           <IonCol
             size="1.5"
-            className={`light-title position-tile ${
+            className={`position-tile ${
               PositionClassMapping[player.position.id as EPosition]
             }`}
           >
             {player.position.shortName}
           </IonCol>
-          <IonCol size="6" className="light-title player-name-col">
+          <IonCol size="6" className="player-name-col">
             {player.displayName}
           </IonCol>
-          <IonCol size="3.5" className="light-title">
+          <IonCol size="3.5">
             {player.matches[0].match.homeTeam.id !== player.team.id && "@"}
             {player.matches[0].match.homeTeam.id === player.team.id
               ? player.matches[0].match.homeTeam.shortName
               : player.matches[0].match.awayTeam.shortName}
           </IonCol>
-          <IonCol size="1" className="ion-text-right light-title">
+          <IonCol size="1" className="ion-text-right">
             {player.matches[0].fantasyPlayerMatches[0].totalPoints}
           </IonCol>
         </IonRow>
@@ -54,7 +52,7 @@ const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
     <IonContent>
       <IonCard>
         <IonCardHeader>
-          <IonCardTitle className="light-title">Starters</IonCardTitle>
+          <IonCardTitle>Starters</IonCardTitle>
         </IonCardHeader>
         <IonCardContent>
           <IonGrid>{rosterTable(true)}</IonGrid>
@@ -62,7 +60,7 @@ const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
       </IonCard>
       <IonCard>
         <IonCardHeader>
-          <IonCardTitle className="light-title">Bench</IonCardTitle>
+          <IonCardTitle>Bench</IonCardTitle>
         </IonCardHeader>
         <IonCardContent>
           <IonGrid>{rosterTable(false)}</IonGrid>

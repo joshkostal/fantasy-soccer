@@ -1,16 +1,9 @@
-import {
-    IonContent,
-  } from "@ionic/react";
-  
-  interface MenuCardProps {}
-  
-  const MenuCard: React.FC<MenuCardProps> = () => {
-    return (
-      <IonContent>
+import { IonContent } from "@ionic/react";
 
-      </IonContent>
-    );
-  };
-  
-  export default MenuCard;
-  
+interface MenuCardProps {}
+
+const MenuCard: React.FC<MenuCardProps> = () => {
+  return <IonContent></IonContent>;
+};
+
+export default MenuCard;

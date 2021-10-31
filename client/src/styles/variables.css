@@ -101,8 +101,11 @@ http://ionicframework.com/docs/theming/ */
   --ion-background-color: #121212;
   --ion-background-color-rgb: 18, 18, 18;
 
-  --ion-text-color: #ffffff;
-  --ion-text-color-rgb: 255, 255, 255;
+  --ion-text-color: #e6ebe7;
+  --ion-text-color-rgb: 230, 235, 231;
+
+  --ion-card-color: #e6ebe7;
+  --ion-card-color-rgb: 230, 235, 231;
 
   --ion-border-color: #222222;
 
@@ -128,7 +131,8 @@ http://ionicframework.com/docs/theming/ */
 
   --ion-item-background: #1e1e1e;
 
-  --ion-toolbar-background: #1f1f1f;
+  --ion-toolbar-background: #121212;
+  --ion-toolbar-background-rgb: 18, 18, 18;
 
   --ion-tab-bar-background: #1f1f1f;
 

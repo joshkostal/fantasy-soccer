@@ -1,5 +1,3 @@
-import '../styles/Team.css';
-
 interface LineupProps { }
 
 const Lineup: React.FC<LineupProps> = () => {

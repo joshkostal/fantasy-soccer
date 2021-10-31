@@ -1,9 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import { IonPage } from "@ionic/react";
+import TabBar from "src/components/TabBar";
 import Header from "../components/Header";
 import Roster from "../components/Roster";
-import "../styles/Team.css";
-import "../styles/variables.css";
 
 const fantasyTeamId = 1;
 
@@ -48,6 +47,7 @@ const Team: React.FC = () => {
   return (
     <IonPage>
       <Header />
+      <TabBar />
       <Roster roster={data.fantasyTeamPlayers} />
     </IonPage>
   );

@@ -20,6 +20,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./styles/variables.css";
+import "./styles/index.css";
 import Team from "./pages/Team";
 import Menu from "./components/Menu";
 import Header from "./components/Header";

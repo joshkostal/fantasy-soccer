@@ -15,11 +15,11 @@ const Header: React.FC<HeaderProps> = () => {
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
-          <IonMenuButton className="light-title"></IonMenuButton>
+          <IonMenuButton></IonMenuButton>
         </IonButtons>
-        <IonTitle className="light-title ion-text-center">League 1</IonTitle>
+        <IonTitle className="ion-text-center">League 1</IonTitle>
         <IonButtons slot="end">
-          <IonIcon name="search-outline" className="light-title search-icon"></IonIcon>
+          <IonIcon name="search-outline" className="search-icon"></IonIcon>
         </IonButtons>
       </IonToolbar>
     </IonHeader>
