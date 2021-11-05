@@ -1,9 +1,24 @@
-import { IonContent } from "@ionic/react";
+import { FantasyTeam } from "@graphql-types/fantasy";
+import {
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonItem,
+} from "@ionic/react";
 
-interface MenuCardProps {}
+interface MenuCardProps {
+  team: FantasyTeam;
+}
 
-const MenuCard: React.FC<MenuCardProps> = () => {
-  return <IonContent></IonContent>;
+const MenuCard: React.FC<MenuCardProps> = ({ team }: MenuCardProps) => {
+  return (
+    <IonItem>
+      <IonCardHeader>
+        <IonCardSubtitle>{team.fantasyLeague.name}</IonCardSubtitle>
+        <IonCardTitle>{team.name}</IonCardTitle>
+      </IonCardHeader>
+    </IonItem>
+  );
 };
 
 export default MenuCard;

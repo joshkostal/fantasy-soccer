@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { IonPage } from "@ionic/react";
+import { IonLoading, IonPage } from "@ionic/react";
 import TabBar from "src/components/TabBar";
 import Header from "../components/Header";
 import Roster from "../components/Roster";
@@ -41,7 +41,7 @@ const Team: React.FC = () => {
 
   const { loading, error, data } = useQuery(TEAM_PLAYERS);
 
-  if (loading) return <p>Loading</p>;
+  if (loading) return <IonLoading isOpen={loading}></IonLoading>;
   if (error) return <p>Error</p>;
 
   return (

@@ -13,3 +13,8 @@ ion-card > .card-content-ios {
 ion-card-header {
   padding-top: 16px;
 }
+
+.spinner {
+  top: 50%;
+  text-align: center;
+}

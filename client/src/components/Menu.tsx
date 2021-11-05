@@ -1,33 +1,68 @@
+import { gql, useQuery } from "@apollo/client";
+import { FantasyTeam } from "@graphql-types/fantasy";
 import {
   IonMenu,
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonLabel,
   IonList,
   IonContent,
-  IonItem,
   IonRouterOutlet,
+  IonSpinner,
 } from "@ionic/react";
+import MenuCard from "./MenuCard";
 
-interface RosterProps {}
+const Menu: React.FC = () => {
+  const userId = 1;
 
-const Menu: React.FC<RosterProps> = () => {
-  return (
-    <>
-      <IonMenu side="start" contentId="main">
+  const LEAGUES = gql`
+    query GetLeagues {
+      fantasyLeagues(userId: ${userId}) {
+        name,
+        fantasyLeague {
+          id,
+          name
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(LEAGUES);
+
+  let menu;
+
+  if (loading) {
+    menu = (
+      <IonContent className="spinner">
+        <IonSpinner></IonSpinner>
+      </IonContent>
+    );
+  } else if (error) {
+    menu = <p>Error</p>;
+  } else {
+    const leagueCards = () =>
+      data.fantasyLeagues.map((team: FantasyTeam) => (
+        <MenuCard key={team.id} team={team} />
+      ));
+
+    menu = (
+      <>
         <IonHeader>
           <IonToolbar>
             <IonTitle>User 1</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonList>
-            <IonItem>
-              <IonLabel>League 2</IonLabel>
-            </IonItem>
-          </IonList>
+          <IonList>{leagueCards()}</IonList>
         </IonContent>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <IonMenu side="start" contentId="main">
+        {menu}
       </IonMenu>
       <IonRouterOutlet id="main"></IonRouterOutlet>
     </>

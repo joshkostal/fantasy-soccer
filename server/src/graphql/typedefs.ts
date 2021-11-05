@@ -76,7 +76,7 @@ const typeDefs: string = `
     type FantasyTeam {
         id: ID!
         name: String!
-        league: FantasyLeague!
+        fantasyLeague: FantasyLeague!
         owner: User!
         players: [FantasyTeamPlayer!]
         team1Matches: [FantasyMatch!]!
@@ -92,7 +92,7 @@ const typeDefs: string = `
 
     type FantasyTeamPlayer {
         id: ID!
-        team: FantasyTeam!
+        fantasyTeam: FantasyTeam!
         player: Player!
         fantasyPlayerMatches: [FantasyPlayerMatch!]
     }
