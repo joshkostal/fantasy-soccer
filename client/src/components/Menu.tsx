@@ -18,6 +18,7 @@ const Menu: React.FC = () => {
   const LEAGUES = gql`
     query GetLeagues {
       fantasyLeagues(userId: ${userId}) {
+        id,
         name,
         fantasyLeague {
           id,

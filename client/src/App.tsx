@@ -1,4 +1,4 @@
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
@@ -23,16 +23,14 @@ import "./styles/variables.css";
 import "./styles/index.css";
 import Team from "./pages/Team";
 import Menu from "./components/Menu";
-import Header from "./components/Header";
 
 const App: React.FC = () => (
   <IonApp>
     <Menu />
-    <Header />
     <IonReactRouter>
       <IonRouterOutlet id="content">
-        <Route exact path="/team" component={Team} />
-        <Redirect exact from="/" to="/team" />
+        <Route exact path="/team/:fantasyTeamId" component={Team} />
+        {/* <Redirect exact from="/" to="/team" /> */}
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

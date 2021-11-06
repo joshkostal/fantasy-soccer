@@ -1,6 +1,7 @@
 import { Context } from "../../prisma";
 
 const fantasyTeamQueries = {
+  // redesign this
   fantasyTeamPlayers: (_root, args, ctx: Context) =>
     ctx.prisma.player.findMany({
       where: {
@@ -19,6 +20,23 @@ const fantasyTeamQueries = {
         team: true,
         position: true,
         // ALIASES NOT YET SUPPORTED BY PRISMA
+        fantasyTeams: {
+          where: {
+            id: args.fantasyTeamId,
+          },
+          select: {
+            fantasyTeam: {
+              select: {
+                name: true,
+                fantasyLeague: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        },
         matches: {
           where: {
             match: {

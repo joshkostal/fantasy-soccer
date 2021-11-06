@@ -1,15 +1,16 @@
 import { gql, useQuery } from "@apollo/client";
 import { IonLoading, IonPage } from "@ionic/react";
+import { RouteComponentProps } from "react-router";
 import TabBar from "src/components/TabBar";
 import Header from "../components/Header";
 import Roster from "../components/Roster";
 
-const fantasyTeamId = 1;
+interface TeamProps extends RouteComponentProps<{ fantasyTeamId: string }> {}
 
-const Team: React.FC = () => {
+const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
   const TEAM_PLAYERS = gql`
     query GetTeamPlayers {
-      fantasyTeamPlayers(fantasyTeamId: ${fantasyTeamId}) {
+      fantasyTeamPlayers(fantasyTeamId: ${match.params.fantasyTeamId}) {
         id,
         displayName,
         team {
@@ -18,6 +19,13 @@ const Team: React.FC = () => {
         position {
           id,
           shortName
+        },
+        fantasyTeams {
+          fantasyTeam {
+            fantasyLeague {
+              name
+            }
+          }
         },
         matches {
           fantasyPlayerMatches {
@@ -46,7 +54,12 @@ const Team: React.FC = () => {
 
   return (
     <IonPage>
-      <Header />
+      <Header
+        leagueName={
+          data.fantasyTeamPlayers[0]?.fantasyTeams[0]?.fantasyTeam.fantasyLeague
+            .name
+        }
+      />
       <TabBar />
       <Roster roster={data.fantasyTeamPlayers} />
     </IonPage>

@@ -419,6 +419,11 @@ const main = async () => {
         name: "League 1",
         id: 1,
       },
+      {
+        commissionerId: 1,
+        name: "League 2",
+        id: 2,
+      },
     ],
   });
 
@@ -428,6 +433,12 @@ const main = async () => {
         id: 1,
         name: "Lukaku's Lads",
         fantasyLeagueId: 1,
+        ownerId: 1,
+      },
+      {
+        id: 2,
+        name: "The Blue Curtain",
+        fantasyLeagueId: 2,
         ownerId: 1,
       },
     ],

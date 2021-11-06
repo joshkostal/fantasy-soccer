@@ -6,18 +6,20 @@ import {
   IonTitle,
   IonIcon,
 } from "@ionic/react";
-import '../styles/Header.css';
+import "../styles/Header.css";
 
-interface HeaderProps {}
+interface HeaderProps {
+  leagueName: string;
+}
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({ leagueName }: HeaderProps) => {
   return (
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
           <IonMenuButton></IonMenuButton>
         </IonButtons>
-        <IonTitle className="ion-text-center">League 1</IonTitle>
+        <IonTitle className="ion-text-center">{leagueName}</IonTitle>
         <IonButtons slot="end">
           <IonIcon name="search-outline" className="search-icon"></IonIcon>
         </IonButtons>

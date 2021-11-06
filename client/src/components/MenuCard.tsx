@@ -12,7 +12,7 @@ interface MenuCardProps {
 
 const MenuCard: React.FC<MenuCardProps> = ({ team }: MenuCardProps) => {
   return (
-    <IonItem>
+    <IonItem routerLink={`team/${team.id}`}>
       <IonCardHeader>
         <IonCardSubtitle>{team.fantasyLeague.name}</IonCardSubtitle>
         <IonCardTitle>{team.name}</IonCardTitle>
