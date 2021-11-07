@@ -4,7 +4,7 @@ import Header from "../components/Header";
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <Header leagueName="League 1" />
+      <Header leagueName="Home" />
       <IonContent fullscreen></IonContent>
     </IonPage>
   );

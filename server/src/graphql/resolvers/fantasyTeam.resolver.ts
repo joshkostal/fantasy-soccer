@@ -27,9 +27,11 @@ const fantasyTeamQueries = {
           select: {
             fantasyTeam: {
               select: {
+                id: true,
                 name: true,
                 fantasyLeague: {
                   select: {
+                    id: true,
                     name: true,
                   },
                 },

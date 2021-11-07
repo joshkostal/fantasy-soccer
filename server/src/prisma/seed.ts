@@ -630,6 +630,17 @@ const main = async () => {
     ],
   });
 
+  const fantasyMatches = await prisma.fantasyMatch.createMany({
+    data: [
+      {
+        gameWeek: 1,
+        team1Id: 1,
+        team2Id: 2,
+        id: 1,
+      },
+    ],
+  });
+
   console.log(
     positions,
     teams,
@@ -640,7 +651,8 @@ const main = async () => {
     fantasyLeagues,
     fantasyTeams,
     fantasyTeamPlayers,
-    fantasyPlayerMatches
+    fantasyPlayerMatches,
+    fantasyMatches
   );
 };
 

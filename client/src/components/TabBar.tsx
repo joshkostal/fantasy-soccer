@@ -1,16 +1,24 @@
 import { IonButton, IonButtons, IonTitle, IonToolbar } from "@ionic/react";
 
-interface TabBarProps {}
+interface TabBarProps {
+  teamId: number;
+  fantasyMatchId: number;
+  leagueId: number;
+}
 
-const TabBar: React.FC<TabBarProps> = () => {
+const TabBar: React.FC<TabBarProps> = ({
+  teamId,
+  fantasyMatchId,
+  leagueId,
+}: TabBarProps) => {
   return (
     <IonToolbar>
       <IonTitle>
         <IonButtons>
-          <IonButton>Team</IonButton>
-          <IonButton>Match</IonButton>
-          <IonButton>Players</IonButton>
-          <IonButton>League</IonButton>
+          <IonButton routerLink={`/team/${teamId}`}>Team</IonButton>
+          <IonButton routerLink={`/match/${fantasyMatchId}`}>Match</IonButton>
+          <IonButton routerLink={`/players/${leagueId}`}>Players</IonButton>
+          <IonButton routerLink={`/league/${leagueId}`}>League</IonButton>
         </IonButtons>
       </IonTitle>
     </IonToolbar>

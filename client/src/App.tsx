@@ -23,14 +23,21 @@ import "./styles/variables.css";
 import "./styles/index.css";
 import Team from "./pages/Team";
 import Menu from "./components/Menu";
+import Match from "./pages/Match";
+import League from "./pages/League";
+import Players from "./pages/Players";
+import Home from "./pages/Home";
 
 const App: React.FC = () => (
   <IonApp>
     <Menu />
     <IonReactRouter>
       <IonRouterOutlet id="content">
+        <Route exact path="/" component={Home} />
         <Route exact path="/team/:fantasyTeamId" component={Team} />
-        {/* <Redirect exact from="/" to="/team" /> */}
+        <Route exact path="/match/:fantasyMatchId" component={Match} />
+        <Route exact path="/players/:fantasyLeagueId" component={Players} />
+        <Route exact path="/league/:fantasyLeagueId" component={League} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

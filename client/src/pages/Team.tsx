@@ -22,8 +22,10 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
         },
         fantasyTeams {
           fantasyTeam {
+            id,
             fantasyLeague {
-              name
+              name,
+              id
             }
           }
         },
@@ -60,7 +62,14 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
             .name
         }
       />
-      <TabBar />
+      <TabBar
+        fantasyMatchId={1}
+        leagueId={
+          data.fantasyTeamPlayers[0]?.fantasyTeams[0]?.fantasyTeam
+            .fantasyLeague.id
+        }
+        teamId={data.fantasyTeamPlayers[0]?.fantasyTeams[0]?.fantasyTeam.id}
+      />
       <Roster roster={data.fantasyTeamPlayers} />
     </IonPage>
   );
