@@ -17,12 +17,15 @@ const Menu: React.FC = () => {
 
   const LEAGUES = gql`
     query GetLeagues {
-      fantasyLeagues(userId: ${userId}) {
-        id,
+      user(userId: ${userId}) {
         name,
-        fantasyLeague {
+        fantasyTeams {
           id,
-          name
+          name,
+          fantasyLeague {
+            id,
+            name
+          }
         }
       }
     }
@@ -42,7 +45,7 @@ const Menu: React.FC = () => {
     menu = <p>Error</p>;
   } else {
     const leagueCards = () =>
-      data.fantasyLeagues.map((team: FantasyTeam) => (
+      data.user.fantasyTeams.map((team: FantasyTeam) => (
         <MenuCard key={team.id} team={team} />
       ));
 
@@ -50,7 +53,7 @@ const Menu: React.FC = () => {
       <>
         <IonHeader>
           <IonToolbar>
-            <IonTitle>User 1</IonTitle>
+            <IonTitle>{data.user.name}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>

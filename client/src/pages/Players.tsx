@@ -6,7 +6,7 @@ const Players: React.FC = () => {
   return (
     <IonPage>
       <Header leagueName="League 1" />
-      <TabBar fantasyMatchId={1} leagueId={1} teamId={1} />
+      <TabBar leagueId={1} teamId={1} />
       <IonContent fullscreen>Players</IonContent>
     </IonPage>
   );

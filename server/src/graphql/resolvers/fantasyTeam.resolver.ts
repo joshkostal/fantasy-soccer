@@ -1,78 +1,98 @@
 import { Context } from "../../prisma";
 
 const fantasyTeamQueries = {
-  // redesign this
-  fantasyTeamPlayers: (_root, args, ctx: Context) =>
-    ctx.prisma.player.findMany({
+  fantasyTeam: async (_root, args, ctx: Context) =>{
+    const nextMatch = await ctx.prisma.match.findFirst({
       where: {
-        fantasyTeams: {
-          some: {
-            fantasyTeamId: args.fantasyTeamId,
-          },
-        },
+        dateTime: {
+          gte: new Date()
+        }
       },
       orderBy: {
-        positionId: "asc",
+        dateTime: "desc",
+      },
+      take: 1,
+      select: {
+        matchWeek: true
+      }
+    });
+
+    return ctx.prisma.fantasyTeam.findFirst({
+      where: {
+        id: args.fantasyTeamId,
       },
       select: {
         id: true,
-        displayName: true,
-        team: true,
-        position: true,
-        // ALIASES NOT YET SUPPORTED BY PRISMA
-        fantasyTeams: {
+        name: true,
+        fantasyLeague: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        fantasyPlayerMatches: {
           where: {
-            id: args.fantasyTeamId,
+            fantasyTeamId: args.fantasyTeamId,
+            AND: {
+              playerMatch: {
+                match: {
+                  matchWeek: nextMatch.matchWeek
+                }
+              }
+            }
+          },
+          orderBy: {
+            playerMatch: {
+              player: {
+                positionId: "asc"
+              }
+            }
           },
           select: {
-            fantasyTeam: {
+            isStarter: true,
+            totalPoints: true,
+            playerMatch: {
               select: {
-                id: true,
-                name: true,
-                fantasyLeague: {
+                player: {
                   select: {
-                    id: true,
-                    name: true,
+                    id: true
+                  }
+                },
+                match: {
+                  select: {
+                    homeTeam: {
+                      select: {
+                        id: true,
+                        shortName: true
+                      }
+                    },
+                    awayTeam: {
+                      select: {
+                        id: true,
+                        shortName: true
+                      }
+                    },
                   },
                 },
               },
             },
           },
         },
-        matches: {
-          where: {
-            match: {
-              dateTime: {
-                gte: new Date(),
-              },
-            },
-          },
-          orderBy: {
-            match: {
-              dateTime: "desc",
-            },
-          },
-          take: 1,
+        players: {
           select: {
-            match: {
+            player: {
               select: {
-                homeTeam: true,
-                awayTeam: true,
-              },
-            },
-            fantasyPlayerMatches: {
-              where: {
-                fantasyTeamId: args.fantasyTeamId,
-              },
-              select: {
-                totalPoints: true,
-                isStarter: true,
+                id: true,
+                displayName: true,
+                team: true,
+                position: true,
               },
             },
           },
         },
       },
-    }),
+    })
+  },
 };
 
 export default fantasyTeamQueries;

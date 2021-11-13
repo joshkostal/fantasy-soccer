@@ -10,38 +10,42 @@ interface TeamProps extends RouteComponentProps<{ fantasyTeamId: string }> {}
 const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
   const TEAM_PLAYERS = gql`
     query GetTeamPlayers {
-      fantasyTeamPlayers(fantasyTeamId: ${match.params.fantasyTeamId}) {
+      fantasyTeam(fantasyTeamId: ${match.params.fantasyTeamId}) {
         id,
-        displayName,
-        team {
+        name,
+        fantasyLeague {
           id,
+          name
         },
-        position {
-          id,
-          shortName
-        },
-        fantasyTeams {
-          fantasyTeam {
+        players {
+          player {
             id,
-            fantasyLeague {
-              name,
-              id
+            displayName,
+            team {
+              id,
+            },
+            position {
+              id,
+              shortName
             }
           }
         },
-        matches {
-          fantasyPlayerMatches {
-            totalPoints,
-            isStarter
-          },
-          match {
-            homeTeam {
+        fantasyPlayerMatches {
+          isStarter,
+          totalPoints,
+          playerMatch {
+            player {
               id,
-              shortName
             },
-            awayTeam {
-              id,
-              shortName
+            match {
+              homeTeam {
+                id,
+                shortName
+              },
+              awayTeam {
+                id,
+                shortName
+              }
             }
           }
         }
@@ -52,25 +56,16 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
   const { loading, error, data } = useQuery(TEAM_PLAYERS);
 
   if (loading) return <IonLoading isOpen={loading}></IonLoading>;
-  if (error) return <p>Error</p>;
+  if (error || !data.fantasyTeam) return <p>Error</p>;
 
   return (
     <IonPage>
-      <Header
-        leagueName={
-          data.fantasyTeamPlayers[0]?.fantasyTeams[0]?.fantasyTeam.fantasyLeague
-            .name
-        }
-      />
+      <Header leagueName={data.fantasyTeam.fantasyLeague.name} />
       <TabBar
-        fantasyMatchId={1}
-        leagueId={
-          data.fantasyTeamPlayers[0]?.fantasyTeams[0]?.fantasyTeam
-            .fantasyLeague.id
-        }
-        teamId={data.fantasyTeamPlayers[0]?.fantasyTeams[0]?.fantasyTeam.id}
+        leagueId={data.fantasyTeam.fantasyLeague.id}
+        teamId={data.fantasyTeam.id}
       />
-      <Roster roster={data.fantasyTeamPlayers} />
+      <Roster team={data.fantasyTeam} />
     </IonPage>
   );
 };

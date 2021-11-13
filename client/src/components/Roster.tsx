@@ -10,43 +10,51 @@ import {
 } from "@ionic/react";
 import "../styles/Team.css";
 import { EPosition, PositionClassMapping } from "../types/player";
-import { Player } from "@graphql-types/player";
+import { FantasyTeam } from "@graphql-types/fantasy";
 
 interface RosterProps {
-  roster: Player[];
+  team: FantasyTeam;
 }
 
-const Roster: React.FC<RosterProps> = ({ roster }: RosterProps) => {
+const Roster: React.FC<RosterProps> = ({ team }: RosterProps) => {
   const rosterTable = (isStarter: boolean) =>
-    roster
+    team.fantasyPlayerMatches
       .filter(
-        (player) =>
-          player.matches[0]?.fantasyPlayerMatches[0]?.isStarter == isStarter
+        (fantasyPlayerMatch) => fantasyPlayerMatch.isStarter === isStarter
       )
-      .map((player) => (
-        <IonRow key={player.id}>
-          <IonCol
-            size="1.5"
-            className={`position-tile ${
-              PositionClassMapping[player.position.id as EPosition]
-            }`}
-          >
-            {player.position.shortName}
-          </IonCol>
-          <IonCol size="6" className="player-name-col">
-            {player.displayName}
-          </IonCol>
-          <IonCol size="3.5">
-            {player.matches[0].match.homeTeam.id !== player.team.id && "@"}
-            {player.matches[0].match.homeTeam.id === player.team.id
-              ? player.matches[0].match.homeTeam.shortName
-              : player.matches[0].match.awayTeam.shortName}
-          </IonCol>
-          <IonCol size="1" className="ion-text-right">
-            {player.matches[0].fantasyPlayerMatches[0].totalPoints}
-          </IonCol>
-        </IonRow>
-      ));
+      .map((fantasyPlayerMatch) => {
+        const fantasyPlayer = team.players.find(
+          (p) => p.player.id === fantasyPlayerMatch.playerMatch.player.id
+        );
+        return (
+          <IonRow key={fantasyPlayer?.id}>
+            <IonCol
+              size="1.5"
+              className={`position-tile ${
+                PositionClassMapping[
+                  fantasyPlayer?.player.position.id as EPosition
+                ]
+              }`}
+            >
+              {fantasyPlayer?.player.position.shortName}
+            </IonCol>
+            <IonCol size="6" className="player-name-col">
+              {fantasyPlayer?.player.displayName}
+            </IonCol>
+            <IonCol size="3.5">
+              {fantasyPlayerMatch.playerMatch.match.homeTeam.id !==
+                fantasyPlayer?.player.team.id && "@"}
+              {fantasyPlayerMatch.playerMatch.match.homeTeam.id ===
+              fantasyPlayer?.player.team.id
+                ? fantasyPlayerMatch.playerMatch.match.homeTeam.shortName
+                : fantasyPlayerMatch.playerMatch.match.awayTeam.shortName}
+            </IonCol>
+            <IonCol size="1" className="ion-text-right">
+              {fantasyPlayerMatch.totalPoints}
+            </IonCol>
+          </IonRow>
+        );
+      });
 
   return (
     <IonContent>

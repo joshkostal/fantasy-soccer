@@ -1,11 +1,11 @@
-import fantasyLeagueQueries from "./fantasyLeague.resolver";
+import userQueries from "./user.resolver";
 import fantasyTeamQueries from "./fantasyTeam.resolver";
 import types from "./types.resolver";
 
 const resolvers = {
   Query: {
     ...fantasyTeamQueries,
-    ...fantasyLeagueQueries,
+    ...userQueries,
   },
   ...types,
 };

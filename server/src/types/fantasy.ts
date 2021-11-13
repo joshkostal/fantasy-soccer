@@ -32,6 +32,7 @@ export interface FantasyTeam {
   fantasyLeague: FantasyLeague;
   owner: User;
   players: FantasyTeamPlayer[];
+  fantasyPlayerMatches: FantasyPlayerMatch[];
   team1Matches: FantasyMatch[];
   team2Matches: FantasyMatch[];
 }

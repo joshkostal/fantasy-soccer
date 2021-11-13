@@ -81,6 +81,7 @@ const typeDefs: string = `
         players: [FantasyTeamPlayer!]
         team1Matches: [FantasyMatch!]!
         team2Matches: [FantasyMatch!]!
+        fantasyPlayerMatches: [FantasyPlayerMatch!]
     }
 
     type FantasyLeague {
@@ -115,8 +116,8 @@ const typeDefs: string = `
     }
 
     type Query {
-        fantasyTeamPlayers(fantasyTeamId: Int): [Player!]!
-        fantasyLeagues(userId: Int): [FantasyTeam!]
+        fantasyTeam(fantasyTeamId: Int): FantasyTeam!
+        user(userId: Int): User!
     }
 
     scalar DateTime

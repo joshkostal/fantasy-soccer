@@ -5,9 +5,9 @@ import Header from "../components/Header";
 const Match: React.FC = () => {
   return (
     <IonPage>
-      <Header leagueName="League 1" />{" "}
-      <TabBar fantasyMatchId={1} leagueId={1} teamId={1} />
-      <IonContent fullscreen>Match</IonContent>
+      <Header leagueName="League 1" />
+      <TabBar leagueId={1} teamId={1} />
+      <IonContent fullscreen></IonContent>
     </IonPage>
   );
 };
