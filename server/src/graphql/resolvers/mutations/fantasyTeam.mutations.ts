@@ -7,7 +7,6 @@ const fantasyTeamMutations = {
     args,
     { prisma }: Context
   ) => {
-    console.log(args);
     return await Promise.all(
       args.fantasyPlayerMatches.map((fantasyPlayerMatch: FantasyPlayerMatch) =>
         updatePlayerPosition(prisma, fantasyPlayerMatch)
