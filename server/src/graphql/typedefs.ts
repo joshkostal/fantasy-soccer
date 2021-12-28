@@ -115,9 +115,20 @@ const typeDefs: string = `
         totalPoints: Int
     }
 
+    input LineupInput {
+        isStarter: Boolean!
+        positionId: Int
+        playerMatchId: Int!
+        fantasyTeamId: Int!
+    }
+
     type Query {
-        fantasyTeam(fantasyTeamId: Int): FantasyTeam!
-        user(userId: Int): User!
+        fantasyTeam(fantasyTeamId: Int!): FantasyTeam!
+        user(userId: Int!): User!
+    }
+
+    type Mutation {
+        updateLineup(fantasyPlayerMatches: [LineupInput!]!): Boolean!
     }
 
     scalar DateTime

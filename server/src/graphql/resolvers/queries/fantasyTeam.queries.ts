@@ -1,23 +1,23 @@
-import { Context } from "../../prisma";
+import { Context } from "../../../prisma";
 
 const fantasyTeamQueries = {
-  fantasyTeam: async (_root, args, ctx: Context) =>{
-    const nextMatch = await ctx.prisma.match.findFirst({
+  fantasyTeam: async (_root, args, { prisma }: Context) => {
+    const nextMatch = await prisma.match.findFirst({
       where: {
         dateTime: {
-          gte: new Date()
-        }
+          gte: new Date(),
+        },
       },
       orderBy: {
         dateTime: "desc",
       },
       take: 1,
       select: {
-        matchWeek: true
-      }
+        matchWeek: true,
+      },
     });
 
-    return ctx.prisma.fantasyTeam.findFirst({
+    return prisma.fantasyTeam.findFirst({
       where: {
         id: args.fantasyTeamId,
       },
@@ -36,17 +36,17 @@ const fantasyTeamQueries = {
             AND: {
               playerMatch: {
                 match: {
-                  matchWeek: nextMatch.matchWeek
-                }
-              }
-            }
+                  matchWeek: nextMatch.matchWeek,
+                },
+              },
+            },
           },
           orderBy: {
             playerMatch: {
               player: {
-                positionId: "asc"
-              }
-            }
+                positionId: "asc",
+              },
+            },
           },
           select: {
             isStarter: true,
@@ -55,22 +55,22 @@ const fantasyTeamQueries = {
               select: {
                 player: {
                   select: {
-                    id: true
-                  }
+                    id: true,
+                  },
                 },
                 match: {
                   select: {
                     homeTeam: {
                       select: {
                         id: true,
-                        shortName: true
-                      }
+                        shortName: true,
+                      },
                     },
                     awayTeam: {
                       select: {
                         id: true,
-                        shortName: true
-                      }
+                        shortName: true,
+                      },
                     },
                   },
                 },
@@ -91,7 +91,7 @@ const fantasyTeamQueries = {
           },
         },
       },
-    })
+    });
   },
 };
 

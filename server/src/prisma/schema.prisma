@@ -5,6 +5,7 @@ datasource db {
 
 generator client {
     provider = "prisma-client-js"
+    binaryTargets = ["native"]
 }
 
 model Player {
@@ -105,23 +106,23 @@ model FantasyTeamPlayer {
 model FantasyPlayerMatch {
     playerMatchId Int
     fantasyTeamId Int
-    isStarter     Boolean @default(false)
+    isStarter     Boolean  @default(false)
     positionId    Int? // TODO: Add check constraint to ensure a position is only selected if isStarter == true (https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/include-unsupported-database-features)
-    totalPoints   Decimal?
+    totalPoints   Decimal? @db.Decimal(4, 2)
 
     position    Position?   @relation(fields: [positionId], references: [id])
     playerMatch PlayerMatch @relation(fields: [playerMatchId], references: [id])
     fantasyTeam FantasyTeam @relation(fields: [fantasyTeamId], references: [id])
 
-    @@unique([playerMatchId, fantasyTeamId])
+    @@id([playerMatchId, fantasyTeamId])
 }
 
 model FantasyMatch {
-    id         Int  @id @default(autoincrement())
+    id         Int      @id @default(autoincrement())
     team1Id    Int
     team2Id    Int
-    team1Score Int?
-    team2Score Int?
+    team1Score Decimal? @db.Decimal(5, 2)
+    team2Score Decimal? @db.Decimal(5, 2)
     gameWeek   Int
 
     team1 FantasyTeam @relation("team1", fields: [team1Id], references: [id])
@@ -164,58 +165,58 @@ model User {
 }
 
 model FantasyLeagueScoreSettings {
-    id               Int  @id @default(autoincrement())
-    fantasyLeagueId  Int? @unique   //This will be customizable by league in the future
-    goal             Decimal @db.Decimal(4,2)
-    assist           Decimal @db.Decimal(4,2)
-    pkWon            Decimal @db.Decimal(4,2)
-    isMOTM           Decimal @db.Decimal(4,2)
-    hasHatTrick      Decimal @db.Decimal(4,2)
-    hasYellowCard    Decimal @db.Decimal(4,2)
-    hasRedCard       Decimal @db.Decimal(4,2)
-    pkConceded       Decimal @db.Decimal(4,2)
-    pkMissed         Decimal @db.Decimal(4,2)
-    offside          Decimal @db.Decimal(4,2)
-    save             Decimal @db.Decimal(4,2)
-    tackle           Decimal @db.Decimal(4,2)
-    pkSaved          Decimal @db.Decimal(4,2)
-    shotBlocked      Decimal @db.Decimal(4,2)
-    interception     Decimal @db.Decimal(4,2)
-    isCleanSheet     Decimal @db.Decimal(4,2)
-    goalConceded     Decimal @db.Decimal(4,2)
-    dribbleCompleted Decimal @db.Decimal(4,2)
-    shotOnTarget     Decimal @db.Decimal(4,2)
-    keyPass          Decimal @db.Decimal(4,2)
-    isShutout        Decimal @db.Decimal(4,2)
-    dribbledPast     Decimal @db.Decimal(4,2)
+    id               Int     @id @default(autoincrement())
+    fantasyLeagueId  Int?    @unique //This will be customizable by league in the future
+    goal             Decimal @db.Decimal(4, 2)
+    assist           Decimal @db.Decimal(4, 2)
+    pkWon            Decimal @db.Decimal(4, 2)
+    isMOTM           Decimal @db.Decimal(4, 2)
+    hasHatTrick      Decimal @db.Decimal(4, 2)
+    hasYellowCard    Decimal @db.Decimal(4, 2)
+    hasRedCard       Decimal @db.Decimal(4, 2)
+    pkConceded       Decimal @db.Decimal(4, 2)
+    pkMissed         Decimal @db.Decimal(4, 2)
+    offside          Decimal @db.Decimal(4, 2)
+    save             Decimal @db.Decimal(4, 2)
+    tackle           Decimal @db.Decimal(4, 2)
+    pkSaved          Decimal @db.Decimal(4, 2)
+    shotBlocked      Decimal @db.Decimal(4, 2)
+    interception     Decimal @db.Decimal(4, 2)
+    isCleanSheet     Decimal @db.Decimal(4, 2)
+    goalConceded     Decimal @db.Decimal(4, 2)
+    dribbleCompleted Decimal @db.Decimal(4, 2)
+    shotOnTarget     Decimal @db.Decimal(4, 2)
+    keyPass          Decimal @db.Decimal(4, 2)
+    isShutout        Decimal @db.Decimal(4, 2)
+    dribbledPast     Decimal @db.Decimal(4, 2)
 
     fantasyLeague FantasyLeague? @relation(fields: [fantasyLeagueId], references: [id])
 }
 
 model PositionScoreMultiplier {
-    positionId       Int @unique
-    goal             Decimal @db.Decimal(4,2)
-    assist           Decimal @db.Decimal(4,2)
-    pkWon            Decimal @db.Decimal(4,2)
-    isMOTM           Decimal @db.Decimal(4,2)
-    hasHatTrick      Decimal @db.Decimal(4,2)
-    hasYellowCard    Decimal @db.Decimal(4,2)
-    hasRedCard       Decimal @db.Decimal(4,2)
-    pkConceded       Decimal @db.Decimal(4,2)
-    pkMissed         Decimal @db.Decimal(4,2)
-    offside          Decimal @db.Decimal(4,2)
-    save             Decimal @db.Decimal(4,2)
-    tackle           Decimal @db.Decimal(4,2)
-    pkSaved          Decimal @db.Decimal(4,2)
-    shotBlocked      Decimal @db.Decimal(4,2)
-    interception     Decimal @db.Decimal(4,2)
-    isCleanSheet     Decimal @db.Decimal(4,2)
-    goalConceded     Decimal @db.Decimal(4,2)
-    dribbleCompleted Decimal @db.Decimal(4,2)
-    shotOnTarget     Decimal @db.Decimal(4,2)
-    keyPass          Decimal @db.Decimal(4,2)
-    isShutout        Decimal @db.Decimal(4,2)
-    dribbledPast     Decimal @db.Decimal(4,2)
+    positionId       Int     @unique
+    goal             Decimal @db.Decimal(4, 2)
+    assist           Decimal @db.Decimal(4, 2)
+    pkWon            Decimal @db.Decimal(4, 2)
+    isMOTM           Decimal @db.Decimal(4, 2)
+    hasHatTrick      Decimal @db.Decimal(4, 2)
+    hasYellowCard    Decimal @db.Decimal(4, 2)
+    hasRedCard       Decimal @db.Decimal(4, 2)
+    pkConceded       Decimal @db.Decimal(4, 2)
+    pkMissed         Decimal @db.Decimal(4, 2)
+    offside          Decimal @db.Decimal(4, 2)
+    save             Decimal @db.Decimal(4, 2)
+    tackle           Decimal @db.Decimal(4, 2)
+    pkSaved          Decimal @db.Decimal(4, 2)
+    shotBlocked      Decimal @db.Decimal(4, 2)
+    interception     Decimal @db.Decimal(4, 2)
+    isCleanSheet     Decimal @db.Decimal(4, 2)
+    goalConceded     Decimal @db.Decimal(4, 2)
+    dribbleCompleted Decimal @db.Decimal(4, 2)
+    shotOnTarget     Decimal @db.Decimal(4, 2)
+    keyPass          Decimal @db.Decimal(4, 2)
+    isShutout        Decimal @db.Decimal(4, 2)
+    dribbledPast     Decimal @db.Decimal(4, 2)
 
     position Position @relation(fields: [positionId], references: [id])
 }

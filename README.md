@@ -31,5 +31,5 @@ Mobile application that provides an improved experience for users seeking in-dep
 * Server
   * npm start
 
-Client
+* Client
   * npm start
