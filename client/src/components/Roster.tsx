@@ -20,7 +20,7 @@ const Roster: React.FC<RosterProps> = ({ team }: RosterProps) => {
   const rosterTable = (isStarter: boolean) =>
     team.fantasyPlayerMatches
       .filter(
-        (fantasyPlayerMatch) => fantasyPlayerMatch.isStarter === isStarter
+        (fantasyPlayerMatch) => !!fantasyPlayerMatch.position?.id === isStarter
       )
       .map((fantasyPlayerMatch) => {
         const fantasyPlayer = team.players.find(
@@ -32,11 +32,11 @@ const Roster: React.FC<RosterProps> = ({ team }: RosterProps) => {
               size="1.5"
               className={`position-tile ${
                 PositionClassMapping[
-                  fantasyPlayer?.player.position.id as EPosition
+                  (fantasyPlayerMatch.position?.id || fantasyPlayer?.player.position.id) as EPosition
                 ]
               }`}
             >
-              {fantasyPlayer?.player.position.shortName}
+              {fantasyPlayerMatch.position?.shortName || fantasyPlayer?.player.position.shortName}
             </IonCol>
             <IonCol size="6" className="player-name-col">
               {fantasyPlayer?.player.displayName}

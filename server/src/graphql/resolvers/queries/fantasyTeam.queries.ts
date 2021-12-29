@@ -49,8 +49,8 @@ const fantasyTeamQueries = {
             },
           },
           select: {
-            isStarter: true,
             totalPoints: true,
+            position: true,
             playerMatch: {
               select: {
                 player: {

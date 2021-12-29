@@ -28,7 +28,6 @@ const updatePlayerPosition = async (
         },
       },
       data: {
-        isStarter: fantasyPlayerMatch.isStarter,
         positionId: fantasyPlayerMatch.positionId,
       },
     });

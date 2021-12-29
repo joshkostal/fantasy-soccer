@@ -99,24 +99,22 @@ const typeDefs: string = `
     }
 
     type FantasyPlayerMatch {
-        isStarter: Boolean!
-        positionId: Int
-        totalPoints: Int
+        position: Position
+        totalPoints: Float
         playerMatch: PlayerMatch!
         fantasyTeam: FantasyTeam!
     }
     
     type FantasyMatch {
         id: ID!
-        team1Score: Int
-        team2Score: Int
+        team1Score: Float
+        team2Score: Float
         team1: FantasyTeam!
         team2: FantasyTeam!
-        totalPoints: Int
+        gameWeek: Int
     }
 
     input LineupInput {
-        isStarter: Boolean!
         positionId: Int
         playerMatchId: Int!
         fantasyTeamId: Int!

@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import client from "./api";
 import App from "./App";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+// import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 ReactDOM.render(
   <ApolloProvider client={client}>
