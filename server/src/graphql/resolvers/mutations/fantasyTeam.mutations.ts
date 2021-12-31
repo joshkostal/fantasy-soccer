@@ -1,23 +1,27 @@
 import { Context } from "../../../prisma";
-import { FantasyPlayerMatch } from "../../../types/fantasy";
+import { LineupInput } from "../../../types/fantasy";
+import { PrismaClient } from ".prisma/client";
 
 const fantasyTeamMutations = {
   updateLineup: async (
     _root,
-    args,
+    { fantasyPlayerMatches },
     { prisma }: Context
   ) => {
     return await Promise.all(
-      args.fantasyPlayerMatches.map((fantasyPlayerMatch: FantasyPlayerMatch) =>
-        updatePlayerPosition(prisma, fantasyPlayerMatch)
+      fantasyPlayerMatches.map((fantasyPlayerMatch: LineupInput) =>
+        updatePlayerPosition(
+          prisma as unknown as PrismaClient,
+          fantasyPlayerMatch
+        )
       )
     );
   },
 };
 
 const updatePlayerPosition = async (
-  prisma,
-  fantasyPlayerMatch: FantasyPlayerMatch
+  prisma: PrismaClient,
+  fantasyPlayerMatch: LineupInput
 ) => {
   try {
     await prisma.fantasyPlayerMatch.update({

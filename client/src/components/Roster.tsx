@@ -32,11 +32,13 @@ const Roster: React.FC<RosterProps> = ({ team }: RosterProps) => {
               size="1.5"
               className={`position-tile ${
                 PositionClassMapping[
-                  (fantasyPlayerMatch.position?.id || fantasyPlayer?.player.position.id) as EPosition
+                  (fantasyPlayerMatch.position?.id ||
+                    fantasyPlayer?.player.position.id) as EPosition
                 ]
               }`}
             >
-              {fantasyPlayerMatch.position?.shortName || fantasyPlayer?.player.position.shortName}
+              {fantasyPlayerMatch.position?.shortName ||
+                fantasyPlayer?.player.position.shortName}
             </IonCol>
             <IonCol size="6" className="player-name-col">
               {fantasyPlayer?.player.displayName}

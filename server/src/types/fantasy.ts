@@ -52,3 +52,9 @@ export interface FantasyTeamPlayer {
   fantasyTeam: FantasyTeam;
   fantasyPlayerMatches: FantasyPlayerMatch[];
 }
+
+export interface LineupInput {
+  positionId: number | null;
+  playerMatchId: number;
+  fantasyTeamId: number;
+}

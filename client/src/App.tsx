@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
+import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
 /* Core CSS required for Ionic components to work properly */
@@ -27,6 +27,8 @@ import Match from "./pages/Match";
 import League from "./pages/League";
 import Players from "./pages/Players";
 import Home from "./pages/Home";
+
+setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
