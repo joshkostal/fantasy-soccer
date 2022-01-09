@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { FantasyPlayerMatch, LineupInput } from "@graphql-types/fantasy";
-import { IonCol, IonContent, IonLoading, IonModal, IonRow } from "@ionic/react";
-import { useState } from "react";
+import { IonCol, IonContent, IonRow } from "@ionic/react";
+import { useEffect, useState } from "react";
 import {
   EPosition,
   InterchangeablePositions,
@@ -22,17 +22,18 @@ interface EditLineupSelection {
 const EditLineup: React.FC<EditLineupProps> = ({
   currentPlayer,
   playersToSwitchWith,
+  onSave,
 }: EditLineupProps) => {
-  const [showModal, setShowModal] = useState(true);
-
-  const [mutateFunction, { data, loading, error }] =
-    useMutation(gql`mutation UpdateLineup (fantasyPlayerMatches: $LineupInput!) {
+  const [updateLineup] = useMutation(gql`
+    mutation UpdateLineup($fantasyPlayerMatches: LineupInput!) {
       updateLineup(fantasyPlayerMatches: $fantasyPlayerMatches)
-    }`);
+    }
+  `);
 
-  if (loading) return <IonLoading isOpen={loading}></IonLoading>;
-  if (error || !data) return <p>Error: {error}</p>;
-  if (data) setShowModal(false);
+  const [updatedData, setUpdatedData] = useState([] as LineupInput[]);
+  useEffect(() => {
+    if (updatedData.length) onSave(updatedData);
+  }, [updatedData]);
 
   const saveLineup = ({
     playerToSwitchWith,
@@ -55,7 +56,7 @@ const EditLineup: React.FC<EditLineupProps> = ({
             fantasyTeamId: currentPlayer.fantasyTeamId,
           },
           {
-            positionId: playerToSwitchWith.positionId || null,
+            positionId: playerToSwitchWith.position?.id || null,
             playerMatchId: playerToSwitchWith.playerMatchId,
             fantasyTeamId: playerToSwitchWith.fantasyTeamId,
           },
@@ -63,13 +64,14 @@ const EditLineup: React.FC<EditLineupProps> = ({
       );
     }
 
-    mutateFunction({ variables: { fantasyPlayerMatches: updatedData } });
+    setUpdatedData(updatedData);
+    updateLineup({ variables: { fantasyPlayerMatches: updatedData } });
   };
 
   // If starter, show valid positions to switch to AND valid players to switch with
   const renderStartList = () => {
     const positionsToDisplay =
-      InterchangeablePositions[currentPlayer.positionId as EPosition];
+      InterchangeablePositions[currentPlayer.position?.id as EPosition];
 
     return (
       <>
@@ -94,7 +96,7 @@ const EditLineup: React.FC<EditLineupProps> = ({
   const renderReserveList = () => {
     return playersToSwitchWith.map((playerToSwitchWith: FantasyPlayerMatch) => (
       <IonRow
-        key={playerToSwitchWith.playerMatchId}
+        key={playerToSwitchWith.playerMatch.id}
         onClick={() => saveLineup({ playerToSwitchWith })}
       >
         <IonCol
@@ -115,10 +117,10 @@ const EditLineup: React.FC<EditLineupProps> = ({
   };
 
   return (
-    <IonModal isOpen={showModal} initialBreakpoint={0.5} breakpoints={[0.5, 1]}>
+    <>
       <IonContent>{currentPlayer.playerMatch.player.displayName}</IonContent>
-      {currentPlayer.positionId ? renderStartList() : renderReserveList()}
-    </IonModal>
+      {currentPlayer.position ? renderStartList() : renderReserveList()}
+    </>
   );
 };
 

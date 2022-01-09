@@ -53,25 +53,18 @@ const fantasyTeamQueries = {
             position: true,
             playerMatch: {
               select: {
+                id: true,
                 player: {
                   select: {
                     id: true,
-                  },
+                    displayName: true,
+                    position: true
+                  }
                 },
                 match: {
                   select: {
-                    homeTeam: {
-                      select: {
-                        id: true,
-                        shortName: true,
-                      },
-                    },
-                    awayTeam: {
-                      select: {
-                        id: true,
-                        shortName: true,
-                      },
-                    },
+                    homeTeam: true,
+                    awayTeam: true,
                   },
                 },
               },

@@ -5,7 +5,7 @@ import { User } from "./user";
 export interface FantasyPlayerMatch {
   playerMatchId: number;
   fantasyTeamId: number;
-  positionId?: number;
+  positionId: number | null;
   position?: Position;
   playerMatch: PlayerMatch;
   fantasyTeam: FantasyTeam;
