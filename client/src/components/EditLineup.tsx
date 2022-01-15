@@ -1,6 +1,15 @@
 import { gql, useMutation } from "@apollo/client";
 import { FantasyPlayerMatch, LineupInput } from "@graphql-types/fantasy";
-import { IonCol, IonContent, IonRow } from "@ionic/react";
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonRow,
+} from "@ionic/react";
 import { useEffect, useState } from "react";
 import {
   EPosition,
@@ -109,18 +118,36 @@ const EditLineup: React.FC<EditLineupProps> = ({
         >
           {playerToSwitchWith.playerMatch.player.position.shortName}
         </IonCol>
-        <IonCol size="10.5" className="player-name-col">
+        <IonCol size="6" className="player-name-col">
           {playerToSwitchWith.playerMatch.player.displayName}
+        </IonCol>
+        <IonCol size="4.5">
+          {playerToSwitchWith.playerMatch.match.homeTeam.id !==
+            playerToSwitchWith.playerMatch.player.team.id && "@"}
+          {playerToSwitchWith.playerMatch.match.homeTeam.id ===
+          playerToSwitchWith.playerMatch.player.team.id
+            ? playerToSwitchWith.playerMatch.match.homeTeam.shortName
+            : playerToSwitchWith.playerMatch.match.awayTeam.shortName}
         </IonCol>
       </IonRow>
     ));
   };
 
   return (
-    <>
-      <IonContent>{currentPlayer.playerMatch.player.displayName}</IonContent>
-      {currentPlayer.position ? renderStartList() : renderReserveList()}
-    </>
+    <IonContent>
+      <IonCard>
+        <IonCardHeader>
+          <IonCardTitle>
+            {currentPlayer.playerMatch.player.displayName}
+          </IonCardTitle>
+        </IonCardHeader>
+        <IonCardContent>
+          <IonGrid>
+            {currentPlayer.position ? renderStartList() : renderReserveList()}
+          </IonGrid>
+        </IonCardContent>
+      </IonCard>
+    </IonContent>
   );
 };
 

@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ leagueName }: HeaderProps) => {
         </IonButtons>
         <IonTitle className="ion-text-center">{leagueName}</IonTitle>
         <IonButtons slot="end">
-          <IonIcon name="search-outline" className="search-icon"></IonIcon>
+          <IonIcon icon="search-outline" className="search-icon"></IonIcon>
         </IonButtons>
       </IonToolbar>
     </IonHeader>

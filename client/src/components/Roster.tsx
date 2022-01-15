@@ -51,17 +51,38 @@ const Roster: React.FC<RosterProps> = ({
 
     const playersToSwitchWith = team.fantasyPlayerMatches.filter(
       (fantasyPlayer) =>
-        (!selectedPlayer.position &&
-          InterchangeablePositions[
-            selectedPlayer.playerMatch.player.position.id as EPosition
-          ].includes(fantasyPlayer.position?.id as EPosition)) ||
-        (selectedPlayer.position?.id &&
-          InterchangeablePositions[
-            selectedPlayer.position?.id as EPosition
-          ].includes(fantasyPlayer.position?.id as EPosition))
+        fantasyPlayer.playerMatch.player.id !=
+          selectedPlayer.playerMatch.player.id &&
+        ((!selectedPlayer.position &&
+          arePositionsSwappable(
+            selectedPlayer.playerMatch.player.position.id as EPosition,
+            fantasyPlayer.position?.id as EPosition
+          )) ||
+          (!fantasyPlayer.position &&
+            selectedPlayer.position &&
+            arePositionsSwappable(
+              selectedPlayer.position?.id as EPosition,
+              fantasyPlayer.playerMatch.player.position.id as EPosition
+            )) ||
+          (fantasyPlayer.position &&
+            selectedPlayer.position?.id &&
+            arePositionsSwappable(
+              selectedPlayer.position?.id as EPosition,
+              fantasyPlayer.position?.id as EPosition
+            )))
     );
 
     setPlayersToSwitchWith(playersToSwitchWith);
+  };
+
+  const arePositionsSwappable = (
+    position1: EPosition,
+    position2: EPosition
+  ) => {
+    return (
+      position1 == position2 ||
+      InterchangeablePositions[position1].includes(position2)
+    );
   };
 
   const rosterTable = (isStarter: boolean) =>
@@ -69,44 +90,40 @@ const Roster: React.FC<RosterProps> = ({
       .filter(
         (fantasyPlayerMatch) => !!fantasyPlayerMatch.position?.id === isStarter
       )
-      .map((fantasyPlayerMatch) => {
-        const fantasyPlayer = team.players.find(
-          (p) => p.player.id === fantasyPlayerMatch.playerMatch.player.id
-        );
-        return (
-          <IonRow
-            key={fantasyPlayer?.id}
-            onClick={() => onEdit(fantasyPlayerMatch)}
+      .map((fantasyPlayerMatch) => (
+        <IonRow
+          key={fantasyPlayerMatch.playerMatch.player.id}
+          onClick={() => onEdit(fantasyPlayerMatch)}
+        >
+          <IonCol
+            size="1.5"
+            className={`position-tile ${
+              PositionClassMapping[
+                (fantasyPlayerMatch.position?.id ||
+                  fantasyPlayerMatch.playerMatch.player.position
+                    .id) as EPosition
+              ]
+            }`}
           >
-            <IonCol
-              size="1.5"
-              className={`position-tile ${
-                PositionClassMapping[
-                  (fantasyPlayerMatch.position?.id ||
-                    fantasyPlayer?.player.position.id) as EPosition
-                ]
-              }`}
-            >
-              {fantasyPlayerMatch.position?.shortName ||
-                fantasyPlayer?.player.position.shortName}
-            </IonCol>
-            <IonCol size="6" className="player-name-col">
-              {fantasyPlayer?.player.displayName}
-            </IonCol>
-            <IonCol size="3.5">
-              {fantasyPlayerMatch.playerMatch.match.homeTeam.id !==
-                fantasyPlayer?.player.team.id && "@"}
-              {fantasyPlayerMatch.playerMatch.match.homeTeam.id ===
-              fantasyPlayer?.player.team.id
-                ? fantasyPlayerMatch.playerMatch.match.homeTeam.shortName
-                : fantasyPlayerMatch.playerMatch.match.awayTeam.shortName}
-            </IonCol>
-            <IonCol size="1" className="ion-text-right">
-              {fantasyPlayerMatch.totalPoints}
-            </IonCol>
-          </IonRow>
-        );
-      });
+            {fantasyPlayerMatch.position?.shortName ||
+              fantasyPlayerMatch.playerMatch.player.position.shortName}
+          </IonCol>
+          <IonCol size="6" className="player-name-col">
+            {fantasyPlayerMatch.playerMatch.player.displayName}
+          </IonCol>
+          <IonCol size="3.5">
+            {fantasyPlayerMatch.playerMatch.match.homeTeam.id !==
+              fantasyPlayerMatch.playerMatch.player.team.id && "@"}
+            {fantasyPlayerMatch.playerMatch.match.homeTeam.id ===
+            fantasyPlayerMatch.playerMatch.player.team.id
+              ? fantasyPlayerMatch.playerMatch.match.homeTeam.shortName
+              : fantasyPlayerMatch.playerMatch.match.awayTeam.shortName}
+          </IonCol>
+          <IonCol size="1" className="ion-text-right">
+            {fantasyPlayerMatch.totalPoints}
+          </IonCol>
+        </IonRow>
+      ));
 
   return (
     <IonContent>

@@ -24,19 +24,6 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
           id,
           name
         },
-        players {
-          player {
-            id,
-            displayName,
-            team {
-              id,
-            },
-            position {
-              id,
-              shortName
-            }
-          }
-        },
         fantasyPlayerMatches {
           totalPoints,
           position {
@@ -48,6 +35,9 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
             player {
               id,
               displayName,
+              team {
+                id,
+              },
               position {
                 id,
                 shortName

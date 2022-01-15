@@ -58,8 +58,9 @@ const fantasyTeamQueries = {
                   select: {
                     id: true,
                     displayName: true,
-                    position: true
-                  }
+                    position: true,
+                    team: true,
+                  },
                 },
                 match: {
                   select: {
@@ -67,18 +68,6 @@ const fantasyTeamQueries = {
                     awayTeam: true,
                   },
                 },
-              },
-            },
-          },
-        },
-        players: {
-          select: {
-            player: {
-              select: {
-                id: true,
-                displayName: true,
-                team: true,
-                position: true,
               },
             },
           },
