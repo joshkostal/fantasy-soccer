@@ -15,17 +15,13 @@ import {
   InterchangeablePositions,
   PositionClassMapping,
 } from "../types/player";
-import {
-  FantasyPlayerMatch,
-  FantasyTeam,
-  LineupInput,
-} from "@graphql-types/fantasy";
+import { FantasyPlayerMatch, FantasyTeam } from "@graphql-types/fantasy";
 import { useState } from "react";
 import EditLineup from "./EditLineup";
 
 interface RosterProps {
   team: FantasyTeam;
-  onRosterChange: (data: LineupInput[]) => void;
+  onRosterChange: () => void;
 }
 
 const Roster: React.FC<RosterProps> = ({
@@ -38,11 +34,10 @@ const Roster: React.FC<RosterProps> = ({
     [] as FantasyPlayerMatch[]
   );
 
-  const onSave = (updatedData: LineupInput[]) => {
+  const onModalClose = (edited: boolean) => {
     setShowModal(false);
-    setCurrentPlayer({} as FantasyPlayerMatch);
-    setPlayersToSwitchWith([]);
-    onRosterChange(updatedData);
+
+    if (edited) onRosterChange();
   };
 
   const onEdit = (selectedPlayer: FantasyPlayerMatch) => {
@@ -145,13 +140,15 @@ const Roster: React.FC<RosterProps> = ({
       </IonCard>
       <IonModal
         isOpen={showModal}
+        onDidDismiss={() => onModalClose(false)}
+        swipeToClose={true}
         initialBreakpoint={0.5}
         breakpoints={[0.5, 1]}
       >
         <EditLineup
           currentPlayer={currentPlayer}
           playersToSwitchWith={playersToSwitchWith}
-          onSave={(data) => onSave(data)}
+          onSave={() => onModalClose(true)}
         />
       </IonModal>
     </IonContent>

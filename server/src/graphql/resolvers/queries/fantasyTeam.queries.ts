@@ -51,6 +51,7 @@ const fantasyTeamQueries = {
           select: {
             totalPoints: true,
             position: true,
+            fantasyTeam: true,
             playerMatch: {
               select: {
                 id: true,

@@ -8,6 +8,7 @@ import {
   IonCol,
   IonContent,
   IonGrid,
+  IonLoading,
   IonRow,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
@@ -20,7 +21,7 @@ import {
 interface EditLineupProps {
   currentPlayer: FantasyPlayerMatch;
   playersToSwitchWith: FantasyPlayerMatch[];
-  onSave: (data: LineupInput[]) => void;
+  onSave: () => void;
 }
 
 interface EditLineupSelection {
@@ -33,48 +34,52 @@ const EditLineup: React.FC<EditLineupProps> = ({
   playersToSwitchWith,
   onSave,
 }: EditLineupProps) => {
-  const [updateLineup] = useMutation(gql`
-    mutation UpdateLineup($fantasyPlayerMatches: LineupInput!) {
+  const [updateLineup, { data, loading, error }] = useMutation(gql`
+    mutation UpdateLineup($fantasyPlayerMatches: [LineupInput!]!) {
       updateLineup(fantasyPlayerMatches: $fantasyPlayerMatches)
     }
   `);
 
   const [updatedData, setUpdatedData] = useState([] as LineupInput[]);
+
   useEffect(() => {
-    if (updatedData.length) onSave(updatedData);
-  }, [updatedData]);
+    if (data && data.updateLineup) onSave();
+  });
 
   const saveLineup = ({
     playerToSwitchWith,
     position,
   }: EditLineupSelection) => {
-    const updatedData: LineupInput[] = [];
+    const lineupUpdate: LineupInput[] = [];
 
     if (position) {
-      updatedData.push({
+      lineupUpdate.push({
         positionId: position,
-        playerMatchId: currentPlayer.playerMatchId,
-        fantasyTeamId: currentPlayer.fantasyTeamId,
+        playerMatchId: currentPlayer.playerMatch.id,
+        fantasyTeamId: currentPlayer.fantasyTeam.id,
       });
     } else if (playerToSwitchWith) {
-      updatedData.push(
+      lineupUpdate.push(
         ...[
           {
             positionId: null,
-            playerMatchId: currentPlayer.playerMatchId,
-            fantasyTeamId: currentPlayer.fantasyTeamId,
+            playerMatchId: currentPlayer.playerMatch.id,
+            fantasyTeamId: currentPlayer.fantasyTeam.id,
           },
           {
-            positionId: playerToSwitchWith.position?.id || null,
-            playerMatchId: playerToSwitchWith.playerMatchId,
-            fantasyTeamId: playerToSwitchWith.fantasyTeamId,
+            positionId:
+              playerToSwitchWith.position?.id ||
+              currentPlayer.position?.id ||
+              null,
+            playerMatchId: playerToSwitchWith.playerMatch.id,
+            fantasyTeamId: playerToSwitchWith.fantasyTeam.id,
           },
         ]
       );
     }
 
-    setUpdatedData(updatedData);
-    updateLineup({ variables: { fantasyPlayerMatches: updatedData } });
+    setUpdatedData(lineupUpdate);
+    updateLineup({ variables: { fantasyPlayerMatches: lineupUpdate } });
   };
 
   // If starter, show valid positions to switch to AND valid players to switch with
@@ -132,6 +137,9 @@ const EditLineup: React.FC<EditLineupProps> = ({
       </IonRow>
     ));
   };
+
+  if (loading) return <IonLoading isOpen={loading}></IonLoading>;
+  if (error || (data && !data.updateLineup)) return <p>Error</p>;
 
   return (
     <IonContent>
