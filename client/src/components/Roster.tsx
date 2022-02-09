@@ -46,39 +46,30 @@ const Roster: React.FC<RosterProps> = ({
 
     const playersToSwitchWith = team.fantasyPlayerMatches.filter(
       (fantasyPlayer) =>
+        // Don't get the same player
         fantasyPlayer.playerMatch.player.id !=
           selectedPlayer.playerMatch.player.id &&
+        // If the selected player is on the bench, get the starters that fit the position
         ((!selectedPlayer.position &&
           arePositionsSwappable(
             selectedPlayer.playerMatch.player.position.id as EPosition,
             fantasyPlayer.position?.id as EPosition
           )) ||
+          // If the selected player is a starter, get the starters or bench players that fit the position
           (!fantasyPlayer.position &&
             selectedPlayer.position &&
             arePositionsSwappable(
               selectedPlayer.position?.id as EPosition,
               fantasyPlayer.playerMatch.player.position.id as EPosition
-            )) ||
-          (fantasyPlayer.position &&
-            selectedPlayer.position?.id &&
-            arePositionsSwappable(
-              selectedPlayer.position?.id as EPosition,
-              fantasyPlayer.position?.id as EPosition
             )))
     );
 
     setPlayersToSwitchWith(playersToSwitchWith);
   };
 
-  const arePositionsSwappable = (
-    position1: EPosition,
-    position2: EPosition
-  ) => {
-    return (
-      position1 == position2 ||
-      InterchangeablePositions[position1].includes(position2)
-    );
-  };
+  const arePositionsSwappable = (position1: EPosition, position2: EPosition) =>
+    position1 == position2 ||
+    InterchangeablePositions[position1].includes(+position2);
 
   const rosterTable = (isStarter: boolean) =>
     team.fantasyPlayerMatches
@@ -111,8 +102,8 @@ const Roster: React.FC<RosterProps> = ({
               fantasyPlayerMatch.playerMatch.player.team.id && "@"}
             {fantasyPlayerMatch.playerMatch.match.homeTeam.id ===
             fantasyPlayerMatch.playerMatch.player.team.id
-              ? fantasyPlayerMatch.playerMatch.match.homeTeam.shortName
-              : fantasyPlayerMatch.playerMatch.match.awayTeam.shortName}
+              ? fantasyPlayerMatch.playerMatch.match.awayTeam.shortName
+              : fantasyPlayerMatch.playerMatch.match.homeTeam.shortName}
           </IonCol>
           <IonCol size="1" className="ion-text-right">
             {fantasyPlayerMatch.totalPoints}

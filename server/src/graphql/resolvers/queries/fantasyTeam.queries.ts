@@ -41,13 +41,18 @@ const fantasyTeamQueries = {
               },
             },
           },
-          orderBy: {
-            playerMatch: {
-              player: {
-                positionId: "asc",
+          orderBy: [
+            {
+              positionId: "asc",
+            },
+            {
+              playerMatch: {
+                player: {
+                  positionId: "asc",
+                },
               },
             },
-          },
+          ],
           select: {
             totalPoints: true,
             position: true,

@@ -62,15 +62,12 @@ const EditLineup: React.FC<EditLineupProps> = ({
       lineupUpdate.push(
         ...[
           {
-            positionId: null,
+            positionId: playerToSwitchWith.position?.id || null,
             playerMatchId: currentPlayer.playerMatch.id,
             fantasyTeamId: currentPlayer.fantasyTeam.id,
           },
           {
-            positionId:
-              playerToSwitchWith.position?.id ||
-              currentPlayer.position?.id ||
-              null,
+            positionId: currentPlayer.position?.id || null,
             playerMatchId: playerToSwitchWith.playerMatch.id,
             fantasyTeamId: playerToSwitchWith.fantasyTeam.id,
           },
@@ -90,17 +87,23 @@ const EditLineup: React.FC<EditLineupProps> = ({
     return (
       <>
         {positionsToDisplay.map((position) => {
-          <IonRow key={position} onClick={() => saveLineup({ position })}>
-            <IonCol
-              size="1.5"
-              className={`position-tile ${
-                PositionClassMapping[position as EPosition]
-              }`}
+          return (
+            <IonRow
+              key={`position-${position}`}
+              onClick={() => saveLineup({ position })}
             >
-              {EPosition[position]}
-            </IonCol>
-          </IonRow>;
+              <IonCol
+                size="1.5"
+                className={`position-tile ${
+                  PositionClassMapping[position as EPosition]
+                }`}
+              >
+                {EPosition[position]}
+              </IonCol>
+            </IonRow>
+          );
         })}
+        <hr />
         {renderReserveList()}
       </>
     );
@@ -117,11 +120,13 @@ const EditLineup: React.FC<EditLineupProps> = ({
           size="1.5"
           className={`position-tile ${
             PositionClassMapping[
-              playerToSwitchWith.playerMatch.player.position.id as EPosition
+              (playerToSwitchWith.position?.id ||
+                playerToSwitchWith.playerMatch.player.position.id) as EPosition
             ]
           }`}
         >
-          {playerToSwitchWith.playerMatch.player.position.shortName}
+          {playerToSwitchWith.position?.shortName ||
+            playerToSwitchWith.playerMatch.player.position.shortName}
         </IonCol>
         <IonCol size="6" className="player-name-col">
           {playerToSwitchWith.playerMatch.player.displayName}
@@ -131,8 +136,8 @@ const EditLineup: React.FC<EditLineupProps> = ({
             playerToSwitchWith.playerMatch.player.team.id && "@"}
           {playerToSwitchWith.playerMatch.match.homeTeam.id ===
           playerToSwitchWith.playerMatch.player.team.id
-            ? playerToSwitchWith.playerMatch.match.homeTeam.shortName
-            : playerToSwitchWith.playerMatch.match.awayTeam.shortName}
+            ? playerToSwitchWith.playerMatch.match.awayTeam.shortName
+            : playerToSwitchWith.playerMatch.match.homeTeam.shortName}
         </IonCol>
       </IonRow>
     ));

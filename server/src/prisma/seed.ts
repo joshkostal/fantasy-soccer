@@ -270,46 +270,48 @@ const main = async () => {
     ],
   });
 
+  const futureDate = new Date(new Date().getFullYear() + 1, 12, 31);
+
   const matches = await prisma.match.createMany({
     data: [
       {
         awayTeamId: 12,
-        dateTime: new Date(2021, 12, 26),
+        dateTime: futureDate,
         homeTeamId: 8,
         matchWeek: 1,
         id: 1,
       },
       {
         awayTeamId: 5,
-        dateTime: new Date(2021, 12, 26),
+        dateTime: futureDate,
         homeTeamId: 11,
         matchWeek: 1,
         id: 2,
       },
       {
         awayTeamId: 7,
-        dateTime: new Date(2021, 12, 26),
+        dateTime: futureDate,
         homeTeamId: 13,
         matchWeek: 1,
         id: 3,
       },
       {
         awayTeamId: 10,
-        dateTime: new Date(2021, 12, 26),
+        dateTime: futureDate,
         homeTeamId: 1,
         matchWeek: 1,
         id: 4,
       },
       {
         awayTeamId: 20,
-        dateTime: new Date(2021, 12, 26),
+        dateTime: futureDate,
         homeTeamId: 17,
         matchWeek: 1,
         id: 5,
       },
       {
         awayTeamId: 19,
-        dateTime: new Date(2021, 12, 26),
+        dateTime: futureDate,
         homeTeamId: 15,
         matchWeek: 1,
         id: 6,
