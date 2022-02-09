@@ -6,9 +6,8 @@ Mobile application that provides an improved experience for users seeking in-dep
 
 ## Screenshots
 
-![Roster Page](/docs/images/Roster.png)
-
-![Edit Lineup Modal](/docs/images/Edit-Lineup.png)
+<img src="/docs/images/Roster.png" width="300" />
+<img src="/docs/images/Edit-Lineup.png"  width="300"/>
 
 ## Stack
 
