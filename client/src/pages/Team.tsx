@@ -64,7 +64,7 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
 
   return (
     <IonPage>
-      <Header leagueName={data.fantasyTeam.fantasyLeague.name} />
+      <Header teamName={data.fantasyTeam.name} />
       <TabBar
         leagueId={data.fantasyTeam.fantasyLeague.id}
         teamId={data.fantasyTeam.id}
