@@ -5,12 +5,14 @@ import cors from "cors";
 import { PrismaClient } from ".prisma/client";
 
 const options: Options = { port: 4000 };
+const prisma = new PrismaClient();
+
 const server = new GraphQLServer({
   typeDefs,
   resolvers,
   context: (req) => ({
     ...req,
-    prisma: new PrismaClient(),
+    prisma,
   }),
 });
 
