@@ -40,7 +40,7 @@ const EditLineup: React.FC<EditLineupProps> = ({
     }
   `);
 
-  const [updatedData, setUpdatedData] = useState([] as LineupInput[]);
+  const [, setUpdatedData] = useState([] as LineupInput[]);
 
   useEffect(() => {
     if (data && data.updateLineup) onSave();

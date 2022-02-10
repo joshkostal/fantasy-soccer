@@ -55,12 +55,10 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
     }
   `;
 
-  const { loading, error, data } = useQuery(TEAM_PLAYERS);
+  const { loading, error, data, refetch } = useQuery(TEAM_PLAYERS);
 
   if (loading) return <IonLoading isOpen={loading}></IonLoading>;
   if (error || !data.fantasyTeam) return <p>Error</p>;
-
-  const onRosterChange = () => {};
 
   return (
     <IonPage>
@@ -69,7 +67,7 @@ const Team: React.FC<TeamProps> = ({ match }: TeamProps) => {
         leagueId={data.fantasyTeam.fantasyLeague.id}
         teamId={data.fantasyTeam.id}
       />
-      <Roster team={data.fantasyTeam} onRosterChange={() => onRosterChange()} />
+      <Roster team={data.fantasyTeam} onRosterChange={() => refetch()} />
     </IonPage>
   );
 };
