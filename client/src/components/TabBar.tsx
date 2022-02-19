@@ -11,7 +11,7 @@ const TabBar: React.FC<TabBarProps> = ({ teamId, leagueId }: TabBarProps) => {
       <IonTitle>
         <IonButtons>
           <IonButton routerLink={`/team/${teamId}`}>Team</IonButton>
-          <IonButton routerLink="/match/current">Match</IonButton>
+          <IonButton routerLink={`/team/${teamId}/match`}>Match</IonButton>
           <IonButton routerLink={`/players/${leagueId}`}>Players</IonButton>
           <IonButton routerLink={`/league/${leagueId}`}>League</IonButton>
         </IonButtons>

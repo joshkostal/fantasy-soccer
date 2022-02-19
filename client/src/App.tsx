@@ -37,6 +37,7 @@ const App: React.FC = () => (
       <IonRouterOutlet id="content">
         <Route exact path="/" component={Home} />
         <Route exact path="/team/:fantasyTeamId" component={Team} />
+        <Route exact path="/team/:fantasyTeamId/match" component={Match} />
         <Route exact path="/match/:fantasyMatchId" component={Match} />
         <Route exact path="/players/:fantasyLeagueId" component={Players} />
         <Route exact path="/league/:fantasyLeagueId" component={League} />

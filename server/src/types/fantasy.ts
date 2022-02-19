@@ -58,3 +58,11 @@ export interface LineupInput {
   playerMatchId: number;
   fantasyTeamId: number;
 }
+
+export interface LeagueStandings {
+  teamId: number;
+  teamName: string;
+  leaguePoints: number;
+  matchPointsFor: number;
+  matchPointsAgainst: number;
+}

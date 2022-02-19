@@ -1,13 +1,20 @@
 import { IonContent, IonPage } from "@ionic/react";
+import { RouteComponentProps } from "react-router";
+import Standings from "src/components/Standings";
 import TabBar from "src/components/TabBar";
 import Header from "../components/Header";
 
-const League: React.FC = () => {
+interface LeagueProps
+  extends RouteComponentProps<{ fantasyLeagueId: string }> {}
+
+const League: React.FC<LeagueProps> = ({ match }: LeagueProps) => {
   return (
     <IonPage>
       <Header teamName="League 1" />
-      <TabBar leagueId={1} teamId={1} />
-      <IonContent fullscreen>league</IonContent>
+      <TabBar leagueId={+match.params.fantasyLeagueId} teamId={1} />
+      <IonContent fullscreen>
+        <Standings leagueId={+match.params.fantasyLeagueId} />
+      </IonContent>
     </IonPage>
   );
 };
