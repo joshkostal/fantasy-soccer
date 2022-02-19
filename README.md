@@ -16,11 +16,14 @@ Mobile application that provides an improved experience for users seeking in-dep
   * React
   * Apollo
   * TypeScript
-* Server
+* API
   * GraphQL
+* Server
   * TypeScript
-  * graphql-yoga
+  * Graphql Yoga
   * Prisma
+* Authentication
+  * GraphQL Shield (not yet implemented)
 * Database
   * PostgresSql
 
