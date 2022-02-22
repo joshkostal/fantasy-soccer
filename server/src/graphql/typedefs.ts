@@ -120,9 +120,18 @@ const typeDefs: string = `
         fantasyTeamId: Int!
     }
 
+    type FantasyLeagueStanding {
+        teamId: Int!
+        teamName: String!
+        leaguePoints: Int!
+        matchPointsFor: Int!
+        matchPointsAgainst: Int!
+    }
+
     type Query {
         fantasyTeam(fantasyTeamId: Int!): FantasyTeam!
         user(userId: Int!): User!
+        fantasyLeagueStandings(fantasyLeagueId: Int!): [FantasyLeagueStanding!]!
     }
 
     type Mutation {

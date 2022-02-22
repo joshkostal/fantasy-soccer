@@ -14,13 +14,19 @@ export interface FantasyPlayerMatch {
 
 export interface FantasyMatch {
   id: number;
-  team1Id: number;
-  team2Id: number;
-  team1Score?: number;
-  team2Score?: number;
-  team1: FantasyTeam;
   team2: FantasyTeam;
   gameWeek: number;
+  teamMatches: FantasyTeamMatch[];
+}
+
+export interface FantasyTeamMatch {
+  id: number;
+  teamId: number;
+  matchId: number;
+  teamScore?: number;
+  isWinner?: boolean;
+  team: FantasyTeam;
+  match: FantasyMatch;
 }
 
 export interface FantasyTeam {
@@ -32,8 +38,7 @@ export interface FantasyTeam {
   owner: User;
   players: FantasyTeamPlayer[];
   fantasyPlayerMatches: FantasyPlayerMatch[];
-  team1Matches: FantasyMatch[];
-  team2Matches: FantasyMatch[];
+  teamMatches: FantasyTeamMatch[];
 }
 
 export interface FantasyLeague {
@@ -59,7 +64,7 @@ export interface LineupInput {
   fantasyTeamId: number;
 }
 
-export interface LeagueStandings {
+export interface FantasyLeagueStanding {
   teamId: number;
   teamName: string;
   leaguePoints: number;

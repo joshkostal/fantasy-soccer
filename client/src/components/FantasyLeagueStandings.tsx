@@ -1,4 +1,4 @@
-import { LeagueStandings } from "@graphql-types/fantasy";
+import { FantasyLeagueStanding } from "@graphql-types/fantasy";
 import {
   IonCard,
   IonCardContent,
@@ -12,7 +12,7 @@ interface StandingsProps {
 }
 
 const Standings: React.FC<StandingsProps> = ({ leagueId }: StandingsProps) => {
-  const data: LeagueStandings[] = [
+  const data: FantasyLeagueStanding[] = [
     {
       leaguePoints: 15,
       matchPointsAgainst: 229,

@@ -1,7 +1,7 @@
 import { Context } from "../../../prisma";
 
 const fantasyTeamQueries = {
-  fantasyTeam: async (_root, args, { prisma }: Context) => {
+  fantasyTeam: async (_root, { fantasyTeamId }, { prisma }: Context) => {
     const nextMatch = await prisma.match.findFirst({
       where: {
         dateTime: {
@@ -19,7 +19,7 @@ const fantasyTeamQueries = {
 
     return prisma.fantasyTeam.findFirst({
       where: {
-        id: args.fantasyTeamId,
+        id: fantasyTeamId,
       },
       select: {
         id: true,
@@ -32,7 +32,7 @@ const fantasyTeamQueries = {
         },
         fantasyPlayerMatches: {
           where: {
-            fantasyTeamId: args.fantasyTeamId,
+            fantasyTeamId: fantasyTeamId,
             AND: {
               playerMatch: {
                 match: {

@@ -1,6 +1,6 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
-import Standings from "src/components/Standings";
+import Standings from "src/components/FantasyLeagueStandings";
 import TabBar from "src/components/TabBar";
 import Header from "../components/Header";
 

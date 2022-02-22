@@ -1,10 +1,10 @@
 import { Context } from "../../../prisma";
 
 const userQueries = {
-  user: (_root, args, { prisma }: Context) =>
+  user: (_root, { userId }, { prisma }: Context) =>
     prisma.user.findFirst({
       where: {
-        id: args.userId,
+        id: userId,
       },
       select: {
         name: true,
@@ -12,9 +12,9 @@ const userQueries = {
           select: {
             id: true,
             name: true,
-            fantasyLeague: true
-          }
-        }
+            fantasyLeague: true,
+          },
+        },
       },
     }),
 };

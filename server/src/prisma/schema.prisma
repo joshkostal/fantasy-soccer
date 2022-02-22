@@ -117,15 +117,21 @@ model FantasyPlayerMatch {
 }
 
 model FantasyMatch {
-  id         Int      @id @default(autoincrement())
-  team1Id    Int
-  team2Id    Int
-  team1Score Decimal? @db.Decimal(5, 2)
-  team2Score Decimal? @db.Decimal(5, 2)
-  gameWeek   Int
+  id       Int @id @default(autoincrement())
+  gameWeek Int
 
-  team1 FantasyTeam @relation("team1", fields: [team1Id], references: [id])
-  team2 FantasyTeam @relation("team2", fields: [team2Id], references: [id])
+  teamMatches FantasyTeamMatch[]
+}
+
+model FantasyTeamMatch {
+  id        Int      @id @default(autoincrement())
+  teamId    Int
+  matchId   Int?
+  teamScore Decimal? @db.Decimal(5, 2)
+  isWinner  Boolean? // What about ties?
+
+  team  FantasyTeam   @relation(fields: [teamId], references: [id])
+  match FantasyMatch? @relation(fields: [matchId], references: [id])
 }
 
 model FantasyTeam {
@@ -137,8 +143,7 @@ model FantasyTeam {
   fantasyLeague        FantasyLeague        @relation(fields: [fantasyLeagueId], references: [id])
   owner                User                 @relation(fields: [ownerId], references: [id])
   players              FantasyTeamPlayer[]
-  team1Matches         FantasyMatch[]       @relation("team1")
-  team2Matches         FantasyMatch[]       @relation("team2")
+  teamMatches          FantasyTeamMatch[]
   fantasyPlayerMatches FantasyPlayerMatch[]
 
   @@unique([fantasyLeagueId, ownerId])
