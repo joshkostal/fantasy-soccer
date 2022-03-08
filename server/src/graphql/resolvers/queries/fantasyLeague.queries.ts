@@ -3,6 +3,7 @@ import {
   FantasyTeam,
   FantasyLeague,
 } from "../../../types/fantasy";
+import { Context } from '@josh-kostal/prisma';
 
 const fantasyLeagueQueries = {
   fantasyLeagueStandings: async (

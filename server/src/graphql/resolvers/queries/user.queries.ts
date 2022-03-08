@@ -1,3 +1,5 @@
+import { Context } from '@josh-kostal/prisma';
+
 const userQueries = {
   user: (_root, { userId }, { prisma }: Context) =>
     prisma.user.findFirst({
