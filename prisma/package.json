@@ -1,0 +1,19 @@
+{
+  "name": "@josh-kostal/prisma",
+  "version": "0.0.1",
+  "description": "The database accessor for my fantasy soccer app",
+  "main": "index.ts",
+  "devDependencies": {
+    "@types/node": "^17.0.21"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Josh Kostal",
+  "dependencies": {
+    "@prisma/client": "^3.10.0"
+  },
+  "prisma": {
+    "seed": "ts-node seed.ts"
+  }
+}

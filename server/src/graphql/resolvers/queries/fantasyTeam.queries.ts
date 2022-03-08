@@ -1,5 +1,3 @@
-import { Context } from "../../../prisma";
-
 const fantasyTeamQueries = {
   fantasyTeam: async (_root, { fantasyTeamId }, { prisma }: Context) => {
     const nextMatch = await prisma.match.findFirst({
