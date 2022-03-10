@@ -2,7 +2,7 @@ import { GraphQLServer, Options } from "graphql-yoga";
 import typeDefs from "./graphql/typedefs";
 import resolvers from "./graphql/resolvers";
 import cors from "cors";
-import { PrismaClient } from '@josh-kostal/prisma';
+import { PrismaClient } from ".prisma/client";
 
 const options: Options = { port: 4000 };
 const prisma = new PrismaClient();
