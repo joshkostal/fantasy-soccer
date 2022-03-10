@@ -1,6 +1,6 @@
 {
   "name": "@josh-kostal/prisma",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The database accessor for my fantasy soccer app",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -25,7 +25,6 @@
     "@prisma/client": "^3.10.0"
   },
   "files": [
-    "lib/**/*",
-    "src/node_modules/.prisma/client/index.d.ts"
+    "lib/**/*"
   ]
 }

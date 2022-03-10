@@ -352,4 +352,4 @@ MigrationBackup/
 .DS_Store
 
 # Compiled Prisma package
-/lib
+lib/
