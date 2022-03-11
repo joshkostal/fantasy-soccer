@@ -1,4 +1,4 @@
-import { PrismaClient } from '.prisma/client';
+import { PrismaClient } from '../lib/client/index';
 
 export interface Context {
   prisma: PrismaClient;

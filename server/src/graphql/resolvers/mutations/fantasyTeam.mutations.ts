@@ -1,6 +1,6 @@
 import { LineupInput } from "../../../types/fantasy";
 import { Context } from '@josh-kostal/prisma';
-import { PrismaClient } from ".prisma/client";
+import { PrismaClient } from "@josh-kostal/prisma/lib/client";
 
 const fantasyTeamMutations = {
   updateLineup: async (
