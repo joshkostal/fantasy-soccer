@@ -1,6 +1,6 @@
 {
   "name": "@josh-kostal/prisma",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The database accessor for my fantasy soccer app",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,8 +12,8 @@
     "typescript": "^4.6.2"
   },
   "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build && cd src && npx prisma generate",
+    "build": "cd src && npx prisma generate && cd .. && tsc",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format",
@@ -22,9 +22,14 @@
   },
   "author": "Josh Kostal",
   "dependencies": {
-    "@prisma/client": "^3.10.0"
+    "@prisma/client": "^3.10.0",
+    "esm": "^3.2.25",
+    "ts-node": "^10.7.0"
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "prisma": {
+    "seed": "node --loader ts-node/esm -r esm seed.ts"
+  }
 }
