@@ -1,4 +1,4 @@
-import { Context } from "../../../prisma";
+import { Context } from '@josh-kostal/prisma';
 
 const fantasyTeamQueries = {
   fantasyTeam: async (_root, { fantasyTeamId }, { prisma }: Context) => {

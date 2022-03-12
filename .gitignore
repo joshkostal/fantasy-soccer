@@ -350,3 +350,9 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 .DS_Store
+
+# Compiled Prisma package
+lib/
+
+# Prisma connection string
+local_db.json

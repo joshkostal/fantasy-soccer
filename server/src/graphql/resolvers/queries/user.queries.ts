@@ -1,4 +1,4 @@
-import { Context } from "../../../prisma";
+import { Context } from '@josh-kostal/prisma';
 
 const userQueries = {
   user: (_root, { userId }, { prisma }: Context) =>
