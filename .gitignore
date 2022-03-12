@@ -353,3 +353,6 @@ MigrationBackup/
 
 # Compiled Prisma package
 lib/
+
+# Prisma connection string
+local_db.json
