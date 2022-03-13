@@ -10,10 +10,12 @@ import {
   IonRouterOutlet,
   IonSpinner,
 } from "@ionic/react";
+import { useContext } from "react";
+import { AppContext } from "src/App";
 import MenuCard from "./MenuCard";
 
 const Menu: React.FC = () => {
-  const userId = 1;
+  const { userId } = useContext(AppContext);
 
   const LEAGUES = gql`
     query GetLeagues {
